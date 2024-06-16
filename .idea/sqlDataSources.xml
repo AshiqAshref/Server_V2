@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="2968612e-6114-4423-b8a4-e4a99011ae71" name="DDL Mapping">
+      <data-sources db="8823ffc2-4b22-45a5-994f-38dcc8d06293" ddl="23f2b015-6979-4733-b61e-6b9abe6737b7" />
+      <scope>
+        <node negative="1">
+          <node kind="database" negative="1">
+            <node kind="schema" qname="@" />
+          </node>
+          <node kind="database" qname="@" />
+        </node>
+      </scope>
+    </mapping>
+  </component>
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="23f2b015-6979-4733-b61e-6b9abe6737b7" />
+          <option name="name" value="testSpring@localhost (DDL)" />
+          <option name="dbmsName" value="MYSQL" />
+          <option name="urls">
+            <array>
+              <option value="file://$PROJECT_DIR$/DDLs" />
+            </array>
+          </option>
+          <option name="outLayout" value="File per object by schema.groovy" />
+        </State>
+      </list>
+    </option>
+  </component>
+</project>

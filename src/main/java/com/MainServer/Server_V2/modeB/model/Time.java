@@ -34,8 +34,8 @@ public class Time {
 
     @OneToMany(
 //            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-            fetch = FetchType.EAGER,
-//            fetch = FetchType.LAZY,
+//            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             mappedBy = "time"
     )
     private List<ReminderB> reminders = new ArrayList<>();

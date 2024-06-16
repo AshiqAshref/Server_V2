@@ -33,9 +33,9 @@ public class Medicine {
     short medAmount;
     @OneToMany(
 //            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-            fetch = FetchType.EAGER,
+//            fetch = FetchType.EAGER,
 
-//            fetch = FetchType.LAZY,
+            fetch = FetchType.LAZY,
             mappedBy = "medicine"
     )
     private  List<ReminderB> reminders = new ArrayList<>();

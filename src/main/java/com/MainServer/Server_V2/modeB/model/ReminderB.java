@@ -21,8 +21,7 @@ public class ReminderB {
 
 
     @ManyToOne(
-            fetch = FetchType.EAGER
-//            fetch = FetchType.LAZY
+            fetch = FetchType.LAZY
 //            cascade = {CascadeType.PERSIST}
     )
     @MapsId("timebId")
