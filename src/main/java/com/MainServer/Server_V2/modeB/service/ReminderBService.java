@@ -69,8 +69,6 @@ public class ReminderBService  {
         if(getByTimeOptional.isPresent())
             return getByTimeOptional.get();
         timeRepository.save(timeToAdd);
-        System.out.println(timeToAdd);
-        System.out.println(timeToAdd);
         return timeToAdd;
     }
 
