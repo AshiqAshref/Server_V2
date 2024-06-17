@@ -15,12 +15,12 @@ public class ModeAResource {
         this.reminderAService = reminderAService;
     }
 
+
     @GetMapping("/all")
     public ResponseEntity<Iterable<ReminderA>> getAllReminders(){
         Iterable<ReminderA> reminders = reminderAService.getAll();
         return new ResponseEntity<>(reminders, HttpStatus.OK);
     }
-
 
 
     @GetMapping("/find/{id}")
@@ -29,17 +29,20 @@ public class ModeAResource {
         return new ResponseEntity<>(reminder, HttpStatus.OK);
     }
 
+
     @PostMapping("/add")
     public ResponseEntity<ReminderA> addReminder(@RequestBody ReminderA reminderA){
         ReminderA newReminder = reminderAService.addReminderA(reminderA);
         return new ResponseEntity<>(newReminder, HttpStatus.CREATED);
     }
 
+
     @PutMapping("/update")
     public ResponseEntity<ReminderA> updateReminder(@RequestBody ReminderA reminderA){
         ReminderA updateReminder = reminderAService.updateReminderA(reminderA);
         return new ResponseEntity<>(updateReminder, HttpStatus.OK);
     }
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteReminder(@PathVariable("id") long id){
