@@ -2,6 +2,8 @@ package com.MainServer.Server_V2.modeB.model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity(name = "ReminderB"
 )@Table(name = "reminderb"
 ) public class ReminderB {
@@ -11,14 +13,10 @@ import jakarta.persistence.*;
 
     @ManyToOne(fetch = FetchType.LAZY
     ) @MapsId("medbId"
-    ) @JoinColumn(name = "medb_id",
-            foreignKey = @ForeignKey(name = "remb_medb_id")
     ) private Medicine medicine;
 
     @ManyToOne(fetch = FetchType.LAZY
     ) @MapsId("timebId"
-    ) @JoinColumn(name = "timeb_id",
-            foreignKey = @ForeignKey(name = "remb_timeb_id")
     ) private Time time;
 
     @Column(name = "timeb_dosage",
@@ -38,16 +36,25 @@ import jakarta.persistence.*;
         return reminderbId;
     }
     public void setReminderbId(ReminderbId reminderbId) {this.reminderbId = reminderbId;}
+
     public Medicine getMedicine() {return medicine;}
-    public void setMedicine(Medicine medicine) {
-        this.medicine = medicine;
-        this.reminderbId.setMedbId(medicine.getId());
-    }
+    public void setMedicine(Medicine medicine) {this.medicine = medicine;}
+
     public Time getTime() {return time;}
-    public void setTime(Time time) {
-        this.time = time;
-        this.reminderbId.setTimebId(time.getId());
+    public void setTime(Time time) {this.time = time;}
+    public short getDosage(){return rembDosage;}
+    public void setDosage(short dosage){this.rembDosage = dosage;}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ReminderB that = (ReminderB) o;
+        return Objects.equals(medicine, that.medicine) &&
+                Objects.equals(time, that.time);
     }
-    public short getRembDosage() {return rembDosage;}
-    public void setRembDosage(short rembDosage) {this.rembDosage = rembDosage;}
+
+    @Override
+    public int hashCode() {return Objects.hash(medicine, time);}
 }

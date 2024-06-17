@@ -8,8 +8,12 @@ import com.MainServer.Server_V2.modeB.model.Time;
 import com.MainServer.Server_V2.modeB.repository.MedicineRepository;
 import com.MainServer.Server_V2.modeB.repository.ReminderBRepository;
 import com.MainServer.Server_V2.modeB.repository.TimeRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.transaction.annotation.Transactional;
+
 
 
 import com.github.javafaker.Faker;
@@ -21,7 +25,7 @@ import java.util.Optional;
 import java.util.Random;
 
 @Service
-@Transactional
+
 public class ReminderBService  {
     public ReminderBRepository reminderBRepository;
     public MedicineRepository medicineRepository;
@@ -36,45 +40,81 @@ public class ReminderBService  {
         this.timeRepository = timeRepository;
     }
 
+    @PersistenceContext
+    private EntityManager em;
+
+
 //    private ReminderBService(){}
 
+    public List<Medicine> addRandomMedicines(int numberOfRecords){
+        List<Medicine> medicines = generateRandomMedicines(numberOfRecords);
+        return medicineRepository.saveAll(medicines);
+    }
 
-    public void addRandom(int numberOfValues) {
+    public List<Medicine> generateRandomMedicines(int numberOfRecords){
+        int freeSpace = (int)(16-medicineRepository.count());
+        if (numberOfRecords>freeSpace)
+            numberOfRecords = freeSpace;
+        List<Medicine> medicines = new ArrayList<>();
+        for (int i = 0; i <= numberOfRecords; i++) {
+            Medicine medicine = getRandomMedicine();
+            try {
+                checkIfMedicineGood(medicine);
+                medicines.add(medicine);
+            }catch (Exception e){
+                i=i-1;
+            }
+        }return medicines;
+    }
+
+    public List<Medicine> getReminders(){
+        List<Medicine> reminders = new ArrayList<>();
+        return reminders;
+    }
 
 
+    @Transactional
+    public void addRandom(int numberOfValues){
         Random random = new Random();
         for (int i = 0; i < numberOfValues; i++) {
 //            Medicine medicine = getRandomMedicine();
 //            medicineRepository.save(medicine);
-//            String randTime = getRandomTime();
-//            Time time = addTime(new Time(randTime));
-//            short dosage = (short) (random.nextInt(4) + 1);
-//            ReminderB reminder = new ReminderB(
-//                    medicine, time, dosage);
+            Medicine medicine = new Medicine();
+            System.out.println();
+            medicine = getMedicineById(1L);
+            String randTime = getRandomTime();
+            Time time = addTime(new Time(randTime));
+
+            short dosage = (short) (random.nextInt(4) + 1);
+
+
+
+//            ReminderB reminder = new ReminderB(medicine, time, dosage);
 //            medicine = addReminderToMedicine(medicine, reminder);
 //            reminderBRepository.save(reminder);
 //            medicine.addReminder(reminder);
 //            medicineRepository.save(medicine);
-
-
-
-            Medicine medicine = new Medicine();
-            Optional<Medicine> optionalMedicine =  medicineRepository.findById(4L);
-                    if(optionalMedicine.isPresent())
-                        medicine = optionalMedicine.get();
-
-            Time time = new Time();
-            Optional<Time> optionalTime = timeRepository.findById(5L);
-            if(optionalTime.isPresent())
-                time = optionalTime.get();
-
-            short dosage = (short) (random.nextInt(4) + 1);
-
-            medicine.addTime(time,dosage);
-            medicineRepository.save(medicine);
-            System.out.println("DONEE");
         }
     }
+
+
+    @Transactional
+    public Time getTimeById(Long id){
+        return timeRepository.findById(id).get();
+    }
+    @Transactional
+    public Medicine getMedicineById(Long id){
+        return medicineRepository.findById(id).get();
+    }
+    @Transactional
+    public void addTimeToMed(Medicine medicine, Time time, short dosage){
+        medicine.addTime(time, dosage);
+    }
+    @Transactional
+    public Medicine saveMedicine(Medicine medicine){
+        return medicineRepository.save(medicine);
+    }
+
 
 
     private Time addTime( Time timeToAdd){
@@ -87,27 +127,32 @@ public class ReminderBService  {
     }
 
 
-    private Medicine addReminderToMedicine(Medicine medicine, ReminderB reminderB){
-//		if(reminderBRepository.findById(reminderB.getReminderbId()).isPresent())
-//			throw new RuntimeException("this Reminder Already Exists");
-
-        medicine.addReminder(reminderB);
-        return medicine;
-    }
-
     public Medicine addMedicine(Medicine medicine) throws DuplicateValueException {
         checkIfMedicineGood(medicine);
         medicineRepository.save(medicine);
         return medicine;
     }
 
+    public void deleteMedicine(Long id) throws DuplicateValueException {
+        medicineRepository.deleteById(id);
+    }
+
+    public Medicine updateMedicine(Medicine medicine) throws DuplicateValueException {
+        checkIfMedicineGood(medicine);
+        return medicineRepository.save(medicine);
+    }
+
+    public List<Medicine> getAllMedicines(){
+        return medicineRepository.findAll();
+    }
+
     private void checkIfMedicineGood(Medicine medicine) throws DuplicateValueException {
         if(medicineRepository.findMedicineByMedName(medicine.getMedName()).isPresent())
-            throw new DuplicateValueException("Medicine Already Exists");
+            throw new DuplicateValueException("Medicine Mame Already Exists");
         Optional<Medicine> getByBoxOptional = medicineRepository.findMedicineByMedBoxNo(medicine.getBox());
         getByBoxOptional.ifPresent( a-> {throw new DuplicateValueException(a.getMedName()+" is in this box");});
-
     }
+
 
 
     private Medicine getRandomMedicine(){
@@ -124,7 +169,6 @@ public class ReminderBService  {
             amount = (short)(int)(faker.random().nextInt(20, 50));
             if(amount%10 == 0) endsWith0=false;
         }
-
         return new Medicine(medicineName, boxNo, amount);
     }
     private String getRandomTime(){

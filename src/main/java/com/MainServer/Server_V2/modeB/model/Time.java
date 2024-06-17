@@ -2,19 +2,22 @@ package com.MainServer.Server_V2.modeB.model;
 
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.NaturalIdCache;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
 
 @Entity(name = "Time")
 @Table(name = "timeb",
-//        uniqueConstraints = {
-//                @UniqueConstraint(name = "timeb_time_unique", columnNames = "timeb_time")
-//        },
         indexes = @Index(name = "timeb_time_index", columnList = "timeb_time", unique = true)
 )
+@NaturalIdCache
 public class Time {
     @Id
     @SequenceGenerator(name = "time_sequence",
@@ -25,24 +28,25 @@ public class Time {
     ) @Column(name = "timeb_id"
     ) private Long timebId;
 
+    @NaturalId
     @Column(name = "timeb_time",
             length = 5,
             nullable = false
     ) private String timebTime;
 
     @OneToMany(mappedBy = "time",
-            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
             orphanRemoval = true
-    ) private List<ReminderB> reminders = new ArrayList<>();
+    ) private List<ReminderB> medicines = new ArrayList<>();
 
 
     public Time(){}
     public Time(String time) {
         this.timebTime = time.trim();
     }
-    public Time(Long id, String time) {
-        this.timebId = id;
-        this.timebTime = time.trim();
+
+    public List<ReminderB> getMedicines(){
+        return this.medicines;
     }
 
     public Long getId() {return timebId;}
@@ -51,19 +55,17 @@ public class Time {
     public String getTime() {return timebTime; }
     public void setTime(String time) {this.timebTime = time.trim();}
 
-
-
-
-//    public List<ReminderB> getReminders() {return reminders;}
-//    public void removeReminder(ReminderB reminder){reminders.remove(reminder);}
-//    public void addReminder(ReminderB reminder){
-//        if (!reminders.contains(reminder)){
-//            reminder.setReminderbId(new ReminderbId(
-//                    reminder.getReminderbId().getMedbId(),this.timebId)
-//            );
-//            reminders.add(reminder);
-//        }
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Time time = (Time) o;
+        return Objects.equals(timebTime, time.timebTime);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(timebTime);
+    }
 
 
     @Override
@@ -71,15 +73,11 @@ public class Time {
         return "{"
                 + "\"timeb_id\" : " + timebId
                 + ",\"timeb_time\" : " + addQuotes(timebTime)
-//                + ", \"timeb_dosage\" : " + timebDosage
-//                +", \"medb_medicines\" : "+ reminders.toString()
                 + "}";
     }
 
-
     private String addQuotes(String a) {
-        if(a.charAt(0)!='\"')
-            return '\"'+a+'\"';
+        if(a.charAt(0)!='\"') return '\"'+a+'\"';
         return a;
     }
 }
