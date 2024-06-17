@@ -3,8 +3,9 @@ package com.MainServer.Server_V2.modeB.model;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ArrayList;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
@@ -14,38 +15,38 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 )
 public class Medicine {
     @Id
-    @Column(name = "med_id")
-    @SequenceGenerator(
-            name = "medicine_sequence",
+    @Column(name = "med_id"
+    ) @SequenceGenerator(name = "medicine_sequence",
             sequenceName = "medicine_sequence",
             allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = SEQUENCE,
-            generator = "medicine_sequence"
-    )
-    Long medId;
-    @Column(name = "med_box_no")
-    short medBoxNo;
-    @Column(name = "med_name", nullable = false)
-    String medName;
-    @Column(name = "med_amount", nullable = false)
-    short medAmount;
-    @OneToMany(
-//            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-//            fetch = FetchType.EAGER,
+    ) @GeneratedValue(generator = "medicine_sequence",
+            strategy = SEQUENCE
+    ) Long id;
 
-            fetch = FetchType.LAZY,
-            mappedBy = "medicine"
-    )
-    private  List<ReminderB> reminders = new ArrayList<>();
+    @Column(name = "med_box_no",
+            unique = true
+    ) short medBoxNo;
+
+    @Column(name = "med_name",
+            nullable = false
+    ) String medName;
+
+    @Column(name = "med_amount",
+            nullable = false
+    ) short medAmount;
+
+    @OneToMany(mappedBy = "medicine",
+            cascade = {CascadeType.ALL},
+            orphanRemoval = true
+//            fetch = FetchType.LAZY,
+    ) private  List<ReminderB> reminders = new ArrayList<>();
 
     public List<ReminderB> getReminders() {return reminders;}
     public void removeReminder(ReminderB reminder){reminders.remove(reminder);}
     public void addReminder(ReminderB reminder){
         if (!reminders.contains(reminder)) {
             reminder.setReminderbId(new ReminderbId(
-                    this.medId, reminder.getReminderbId().getTimebId())
+                    this.id, reminder.getReminderbId().getTimebId())
             );
             reminders.add(reminder);
         }
@@ -60,10 +61,38 @@ public class Medicine {
     public Medicine(){}
 
 
+    public void addTime(Time time, short dosage){
+        ReminderB reminder = new ReminderB(this, time, dosage);
+        addReminder(reminder);
+//        time.addReminder(reminder);
+    }
 
+    public void removeTime(Time time) {
+        ReminderbId reminderId = new ReminderbId(this.getId(), time.getId());
+        for (ReminderB reminder : reminders )
+            if (reminder.getReminderbId().equals(reminderId)) {
+                reminders.remove(reminder);
+                break;
+            }
+    }
 
-    public void setMedId(Long med_id) {this.medId =med_id;}
-    public Long getMedId() {return medId;}
+//    public void removeTime(Time time) {
+//        for (Iterator<ReminderB> iterator = reminders.iterator();
+//             iterator.hasNext(); ) {
+//            ReminderB reminder = iterator.next();
+//
+//            if (reminder.getMedicine().equals(this) &&
+//                    reminder.getTime().equals(time)) {
+//                iterator.remove();
+//                reminder.getTime().getReminders().remove(reminder);
+//                reminder.setMedicine(null);
+//                reminder.setTime(null);
+//            }
+//        }
+//    }
+
+    public void setId(Long med_id) {this.id =med_id;}
+    public Long getId() {return id;}
     public String getMedName() {return medName;}
     public void setMedName(String medName) {this.medName = medName.trim();}
     public short getMedAmount() {return medAmount;}
@@ -79,7 +108,7 @@ public class Medicine {
     @Override
     public String toString() {
         return "{"
-                + "\"med_id\" : "  + medId
+                + "\"med_id\" : "  + id
                 + ",\"med_box_no\" : "+ medBoxNo
                 + ",\"med_name\" : " +  addQuotes(medName)
                 + ", \"med_amount\" : " + medAmount

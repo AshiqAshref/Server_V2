@@ -41,24 +41,38 @@ public class ReminderBService  {
 
     public void addRandom(int numberOfValues) {
 
+
         Random random = new Random();
         for (int i = 0; i < numberOfValues; i++) {
-            Medicine medicine = getRandomMedicine();
+//            Medicine medicine = getRandomMedicine();
+//            medicineRepository.save(medicine);
+//            String randTime = getRandomTime();
+//            Time time = addTime(new Time(randTime));
+//            short dosage = (short) (random.nextInt(4) + 1);
+//            ReminderB reminder = new ReminderB(
+//                    medicine, time, dosage);
+//            medicine = addReminderToMedicine(medicine, reminder);
+//            reminderBRepository.save(reminder);
+//            medicine.addReminder(reminder);
+//            medicineRepository.save(medicine);
 
-            medicineRepository.save(medicine);
 
-            String randTime = getRandomTime();
-            Time time = addTime(new Time(randTime));
+
+            Medicine medicine = new Medicine();
+            Optional<Medicine> optionalMedicine =  medicineRepository.findById(4L);
+                    if(optionalMedicine.isPresent())
+                        medicine = optionalMedicine.get();
+
+            Time time = new Time();
+            Optional<Time> optionalTime = timeRepository.findById(5L);
+            if(optionalTime.isPresent())
+                time = optionalTime.get();
 
             short dosage = (short) (random.nextInt(4) + 1);
 
-            ReminderB reminder = new ReminderB(
-                    new ReminderbId(medicine.getMedId(), time.getId()),
-                    medicine, time, dosage);
-            medicine = addReminderToMedicine(medicine, reminder);
-            reminderBRepository.save(reminder);
-            medicine.addReminder(reminder);
+            medicine.addTime(time,dosage);
             medicineRepository.save(medicine);
+            System.out.println("DONEE");
         }
     }
 

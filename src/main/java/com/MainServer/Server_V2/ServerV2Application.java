@@ -24,10 +24,10 @@ public class ServerV2Application {
 	CommandLineRunner commandLineRunner(ReminderAService reminderAService, ReminderBService reminderBService){
 		return args ->{
 			try{
-//				reminderBService.addRandom(2);
+				reminderBService.addRandom(2);
 //				reminderAService.addRandom(5);
 			}catch(Exception e){
-				System.out.println(e.toString());
+				e.printStackTrace();
 			}
 		};
 	}

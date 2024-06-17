@@ -17,39 +17,33 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 )
 public class Time {
     @Id
-    @SequenceGenerator(
-            name = "time_sequence",
+    @SequenceGenerator(name = "time_sequence",
             sequenceName = "time_sequence",
             allocationSize = 1
-    ) @GeneratedValue(
-            strategy = SEQUENCE,
-            generator = "time_sequence"
-    ) @Column(name = "timeb_id")
-    private Long timebId;
+    ) @GeneratedValue(generator = "time_sequence",
+            strategy = SEQUENCE
+    ) @Column(name = "timeb_id"
+    ) private Long timebId;
 
-    @Column(name = "timeb_time", length = 5, nullable = false)
-    private String timebTime;
+    @Column(name = "timeb_time",
+            length = 5,
+            nullable = false
+    ) private String timebTime;
 
-
-
-    @OneToMany(
-//            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-//            fetch = FetchType.EAGER,
+    @OneToMany(mappedBy = "time",
             fetch = FetchType.LAZY,
-            mappedBy = "time"
-    )
-    private List<ReminderB> reminders = new ArrayList<>();
+            orphanRemoval = true
+    ) private List<ReminderB> reminders = new ArrayList<>();
 
 
+    public Time(){}
+    public Time(String time) {
+        this.timebTime = time.trim();
+    }
     public Time(Long id, String time) {
         this.timebId = id;
         this.timebTime = time.trim();
     }
-    public Time(String time) {
-        this.timebTime = time.trim();
-    }
-    public Time(){}
-
 
     public Long getId() {return timebId;}
     public void setId(Long id) {this.timebId = id;}
@@ -57,16 +51,19 @@ public class Time {
     public String getTime() {return timebTime; }
     public void setTime(String time) {this.timebTime = time.trim();}
 
-    public List<ReminderB> getReminders() {return reminders;}
-    public void removeReminder(ReminderB reminder){reminders.remove(reminder);}
-    public void addReminder(ReminderB reminder){
-        if (!reminders.contains(reminder)){
-            reminder.setReminderbId(new ReminderbId(
-                    reminder.getReminderbId().getMedbId(),this.timebId)
-            );
-            reminders.add(reminder);
-        }
-    }
+
+
+
+//    public List<ReminderB> getReminders() {return reminders;}
+//    public void removeReminder(ReminderB reminder){reminders.remove(reminder);}
+//    public void addReminder(ReminderB reminder){
+//        if (!reminders.contains(reminder)){
+//            reminder.setReminderbId(new ReminderbId(
+//                    reminder.getReminderbId().getMedbId(),this.timebId)
+//            );
+//            reminders.add(reminder);
+//        }
+//    }
 
 
     @Override
