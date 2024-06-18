@@ -72,6 +72,14 @@ public class ReminderBService  {
         return reminders;
     }
 
+    public ReminderB updateReminder(ReminderB reminder){
+        return null;
+    }
+
+    public void deleteReminder(){
+        
+    }
+
 
     @Transactional
     public void addRandom(int numberOfValues){
