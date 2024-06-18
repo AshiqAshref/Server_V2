@@ -1,10 +1,12 @@
 package com.MainServer.Server_V2.modeB.service;
 
 import com.MainServer.Server_V2.exception.DuplicateValueException;
+
 import com.MainServer.Server_V2.modeB.model.Medicine;
 import com.MainServer.Server_V2.modeB.model.ReminderB;
-import com.MainServer.Server_V2.modeB.model.ReminderbId;
 import com.MainServer.Server_V2.modeB.model.Time;
+import com.MainServer.Server_V2.modeB.model.view.ReminderView;
+import com.MainServer.Server_V2.modeB.model.view.TimeView;
 import com.MainServer.Server_V2.modeB.repository.MedicineRepository;
 import com.MainServer.Server_V2.modeB.repository.ReminderBRepository;
 import com.MainServer.Server_V2.modeB.repository.TimeRepository;
@@ -44,108 +46,50 @@ public class ReminderBService  {
     private EntityManager em;
 
 
-//    private ReminderBService(){}
 
-    public List<Medicine> addRandomMedicines(int numberOfRecords){
-        List<Medicine> medicines = generateRandomMedicines(numberOfRecords);
-        return medicineRepository.saveAll(medicines);
+
+
+    public List<ReminderView> getAllReminders(){
+        return reminderBtoReminderView(medicineRepository.findAll());
     }
-
-    public List<Medicine> generateRandomMedicines(int numberOfRecords){
-        int freeSpace = (int)(16-medicineRepository.count());
-        if (numberOfRecords>freeSpace)
-            numberOfRecords = freeSpace;
-        List<Medicine> medicines = new ArrayList<>();
-        for (int i = 0; i <= numberOfRecords; i++) {
-            Medicine medicine = getRandomMedicine();
-            try {
-                checkIfMedicineGood(medicine);
-                medicines.add(medicine);
-            }catch (Exception e){
-                i=i-1;
-            }
-        }return medicines;
+    private ReminderView reminderBtoReminderView(Medicine medicine){
+        ReminderView reminder = new ReminderView(medicine);
+        for(ReminderB reminderB : medicine.getTimes())
+            reminder.addTime(new TimeView(reminderB.getTime(),reminderB.getDosage()));
+        return reminder;
     }
-
-    public List<Medicine> getReminders(){
-        List<Medicine> reminders = new ArrayList<>();
+    private List<ReminderView> reminderBtoReminderView(List<Medicine> medicines){
+        List<ReminderView> reminders = new ArrayList<>();
+        for(Medicine medicine : medicines)
+            reminders.add(reminderBtoReminderView(medicine));
         return reminders;
     }
 
-    public ReminderB updateReminder(ReminderB reminder){
+    public ReminderView addReminder(ReminderView reminder){
         return null;
     }
-
-    public void deleteReminder(){
-        
+    public ReminderView updateReminder(ReminderView reminder){
+        return null;
     }
+    public void deleteReminder(long medbId, long timebId){
 
-
-    @Transactional
-    public void addRandom(int numberOfValues){
-        Random random = new Random();
-        for (int i = 0; i < numberOfValues; i++) {
-//            Medicine medicine = getRandomMedicine();
-//            medicineRepository.save(medicine);
-            Medicine medicine = new Medicine();
-            System.out.println();
-            medicine = getMedicineById(1L);
-            String randTime = getRandomTime();
-            Time time = addTime(new Time(randTime));
-
-            short dosage = (short) (random.nextInt(4) + 1);
-
-
-
-//            ReminderB reminder = new ReminderB(medicine, time, dosage);
-//            medicine = addReminderToMedicine(medicine, reminder);
-//            reminderBRepository.save(reminder);
-//            medicine.addReminder(reminder);
-//            medicineRepository.save(medicine);
-        }
-    }
-
-
-    @Transactional
-    public Time getTimeById(Long id){
-        return timeRepository.findById(id).get();
-    }
-    @Transactional
-    public Medicine getMedicineById(Long id){
-        return medicineRepository.findById(id).get();
-    }
-    @Transactional
-    public void addTimeToMed(Medicine medicine, Time time, short dosage){
-        medicine.addTime(time, dosage);
-    }
-    @Transactional
-    public Medicine saveMedicine(Medicine medicine){
-        return medicineRepository.save(medicine);
     }
 
 
 
-    private Time addTime( Time timeToAdd){
-        Optional<Time> getByTimeOptional = timeRepository
-                .findTimeByTimebTime(timeToAdd.getTime());
-        if(getByTimeOptional.isPresent())
-            return getByTimeOptional.get();
-        timeRepository.save(timeToAdd);
-        return timeToAdd;
-    }
 
 
-    public Medicine addMedicine(Medicine medicine) throws DuplicateValueException {
+    public Medicine addMedicine(Medicine medicine)  {
         checkIfMedicineGood(medicine);
         medicineRepository.save(medicine);
         return medicine;
     }
 
-    public void deleteMedicine(Long id) throws DuplicateValueException {
+    public void deleteMedicine(Long id) {
         medicineRepository.deleteById(id);
     }
 
-    public Medicine updateMedicine(Medicine medicine) throws DuplicateValueException {
+    public Medicine updateMedicine(Medicine medicine)  {
         checkIfMedicineGood(medicine);
         return medicineRepository.save(medicine);
     }
@@ -154,39 +98,24 @@ public class ReminderBService  {
         return medicineRepository.findAll();
     }
 
-    private void checkIfMedicineGood(Medicine medicine) throws DuplicateValueException {
+    private void checkIfMedicineGood(Medicine medicine) {
         if(medicineRepository.findMedicineByMedName(medicine.getMedName()).isPresent())
-            throw new DuplicateValueException("Medicine Mame Already Exists");
-        Optional<Medicine> getByBoxOptional = medicineRepository.findMedicineByMedBoxNo(medicine.getBox());
-        getByBoxOptional.ifPresent( a-> {throw new DuplicateValueException(a.getMedName()+" is in this box");});
+            throw new DuplicateValueException("Medicine with name " + medicine.getMedName() + " already exists");
+        Optional<Medicine> medicineOptional =  medicineRepository.findMedicineByMedBoxNo(medicine.getBox());
+        if(medicineOptional.isPresent())
+            throw new DuplicateValueException(medicineOptional.get().getMedName()+" is in box no" + medicine.getBox() + " already exists");
     }
 
 
 
-    private Medicine getRandomMedicine(){
-        Faker faker = new Faker();
-        List<Short> boxes = new ArrayList<Short>();
-        for (int i = 1; i <= 16; i++)
-            boxes.add((short)i);
 
-        short boxNo = boxes.remove((int) faker.random().nextInt(0, boxes.size() - 1));
-        String medicineName = faker.medical().medicineName().toLowerCase();
-        short amount = 0;
-        boolean endsWith0=true;
-        while(endsWith0){
-            amount = (short)(int)(faker.random().nextInt(20, 50));
-            if(amount%10 == 0) endsWith0=false;
-        }
-        return new Medicine(medicineName, boxNo, amount);
-    }
-    private String getRandomTime(){
-        Random rand = new Random();
-        String hour =   addZeroAstetic(rand.nextInt(0,24));
-        String minute = addZeroAstetic(rand.nextInt(0,59));
-        return hour+':'+minute;
-    }
+
+
     private String addZeroAstetic(int number){
         if(number<10) return "0"+number;
         return ""+number;
     }
+
+
+
 }
