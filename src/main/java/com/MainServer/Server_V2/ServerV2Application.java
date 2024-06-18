@@ -2,6 +2,7 @@ package com.MainServer.Server_V2;
 
 import com.MainServer.Server_V2.modeA.service.ReminderAService;
 import com.MainServer.Server_V2.modeB.service.ReminderBService;
+import com.MainServer.Server_V2.modeB.service.ReminderBServiceTest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -21,10 +22,11 @@ public class ServerV2Application {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(ReminderAService reminderAService, ReminderBService reminderBService){
+	CommandLineRunner commandLineRunner(ReminderAService reminderAService, ReminderBService reminderBService, ReminderBServiceTest reminderBServiceTest){
 		return args ->{
 			try{
-				reminderBService.addRandom(2);
+
+				reminderBServiceTest.test(2);
 //				reminderAService.addRandom(5);
 			}catch(Exception e){
 				e.printStackTrace();

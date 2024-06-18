@@ -44,6 +44,10 @@ public class Time {
     public Time(String time) {
         this.timebTime = time.trim();
     }
+    public Time(long timebId, String time) {
+        this.timebId = timebId;
+        this.timebTime = time.trim();
+    }
 
     public List<ReminderB> getMedicines(){
         return this.medicines;
