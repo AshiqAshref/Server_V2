@@ -20,8 +20,6 @@ public class ReminderView {
     }
 
 
-
-
     @Override
     public String toString() {
         return "{"
