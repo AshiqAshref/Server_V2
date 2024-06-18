@@ -1,0 +1,407 @@
+Subject: [PATCH] v222
+---
+Index: .idea/uiDesigner.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/uiDesigner.xml b/.idea/uiDesigner.xml
+new file mode 100644
+--- /dev/null	(revision cb16a6d583156f7cd52584614abca64f075f69ae)
++++ b/.idea/uiDesigner.xml	(revision cb16a6d583156f7cd52584614abca64f075f69ae)
+@@ -0,0 +1,124 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Palette2">
++    <group name="Swing">
++      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
++      </item>
++      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.svg" removable="false" auto-create-binding="false" can-attach-label="true">
++        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
++        <initial-values>
++          <property name="text" value="Button" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="RadioButton" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="CheckBox" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="Label" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
++          <preferred-size width="-1" height="20" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
++      </item>
++    </group>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/main/java/com/MainServer/Server_V2/modeB/model/view/MedicineView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/MainServer/Server_V2/modeB/model/view/MedicineView.java b/src/main/java/com/MainServer/Server_V2/modeB/model/view/MedicineView.java
+new file mode 100644
+--- /dev/null	(revision cb16a6d583156f7cd52584614abca64f075f69ae)
++++ b/src/main/java/com/MainServer/Server_V2/modeB/model/view/MedicineView.java	(revision cb16a6d583156f7cd52584614abca64f075f69ae)
+@@ -0,0 +1,32 @@
++package com.MainServer.Server_V2.modeB.model.view;
++
++import java.util.ArrayList;
++import java.util.List;
++
++public class MedicineView {
++    private long id;
++    private String medName;
++    private short medBoxNo;
++    private short medAmount;
++
++    public MedicineView(long id, String medName, short medAmount) {
++        this.id = id;
++        this.medName = medName;
++        this.medAmount = medAmount;
++    }
++    public MedicineView(String medName, short medAmount) {
++        this.medName = medName;
++        this.medAmount = medAmount;
++    }
++
++    public long getId() {return id;}
++    public void setId(long id) {this.id = id;}
++    public String getMedName() {return medName;}
++    public void setMedBoxNo(short medBoxNo) {this.medBoxNo = medBoxNo;}
++    public short getMedBoxNo() {return medBoxNo;}
++    public void setMedName(String medName) {this.medName = medName;}
++    public short getMedAmount() {return medAmount;}
++    public void setMedAmount(short medAmount) {this.medAmount = medAmount;}
++
++
++}
+Index: src/main/java/com/MainServer/Server_V2/modeB/model/view/ReminderView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/MainServer/Server_V2/modeB/model/view/ReminderView.java b/src/main/java/com/MainServer/Server_V2/modeB/model/view/ReminderView.java
+new file mode 100644
+--- /dev/null	(revision cb16a6d583156f7cd52584614abca64f075f69ae)
++++ b/src/main/java/com/MainServer/Server_V2/modeB/model/view/ReminderView.java	(revision cb16a6d583156f7cd52584614abca64f075f69ae)
+@@ -0,0 +1,40 @@
++package com.MainServer.Server_V2.modeB.model.view;
++
++import com.MainServer.Server_V2.modeB.model.Medicine;
++
++import java.util.ArrayList;
++import java.util.List;
++
++public class ReminderView {
++    private Medicine medicine;
++    private List<TimeView> times = new ArrayList<>();
++
++    public ReminderView(Medicine medicine, List<TimeView> time){
++        this.medicine = medicine;
++        this.times = time;
++    }
++
++    public ReminderView(Medicine medicine){
++        this.medicine = medicine;
++//        this.times = time;
++    }
++
++
++
++
++    @Override
++    public String toString() {
++        return "{"
++                + "\"med_id\" : "  + medicine.getId()
++                + ",\"med_box_no\" : "+ medicine.getBox()
++                + ",\"med_name\" : " +  addQuotes(medicine.getMedName())
++                + ", \"med_amount\" : " + medicine.getMedAmount()
++                + ", \"times\" : " + times
++                +"}";
++    }
++    private String addQuotes(String a) {
++        if(a.charAt(0)!='\"')
++            return '\"'+a+'\"';
++        return a;
++    }
++}
+Index: src/main/java/com/MainServer/Server_V2/modeB/model/view/TimeView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/MainServer/Server_V2/modeB/model/view/TimeView.java b/src/main/java/com/MainServer/Server_V2/modeB/model/view/TimeView.java
+new file mode 100644
+--- /dev/null	(revision cb16a6d583156f7cd52584614abca64f075f69ae)
++++ b/src/main/java/com/MainServer/Server_V2/modeB/model/view/TimeView.java	(revision cb16a6d583156f7cd52584614abca64f075f69ae)
+@@ -0,0 +1,37 @@
++package com.MainServer.Server_V2.modeB.model.view;
++
++public class TimeView {
++    private long timebId;
++    private String timebTime;
++    private short amount;
++
++    public TimeView(long timebId, String timebTime, short amount) {
++        this.timebId = timebId;
++        this.timebTime = timebTime;
++        this.amount = amount;
++    }
++    public TimeView(String timebTime, short amount) {
++        this.timebTime = timebTime;
++        this.amount = amount;
++    }
++
++    public long getTimebId() {return timebId;}
++    public void setTimebId(long timebId) {this.timebId = timebId;}
++    public String getTimebTime() {return timebTime;}
++    public void setTimebTime(String timebTime) {this.timebTime = timebTime;}
++    public short getAmount() {return amount;}
++    public void setAmount(short amount) {this.amount = amount;}
++
++    @Override
++    public String toString() {
++        return "{"
++                + "\"timeb_id\" : " + timebId
++                + ",\"timeb_time\" : " + addQuotes(timebTime)
++                + ",\"amount\" : " + amount
++                + "}";
++    }
++    private String addQuotes(String a) {
++        if(a.charAt(0)!='\"') return '\"'+a+'\"';
++        return a;
++    }
++}
+Index: src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/src/main/resources/application.properties b/src/main/resources/application.properties
+--- a/src/main/resources/application.properties	(revision 1b406a93c1b6b8f0b3ffc5308345c36da37eef51)
++++ b/src/main/resources/application.properties	(revision cb16a6d583156f7cd52584614abca64f075f69ae)
+@@ -7,7 +7,7 @@
+ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+ spring.jpa.show-sql = true
+ #spring.jpa.hibernate.ddl-auto = update
+-spring.jpa.hibernate.ddl-auto = none
++spring.jpa.hibernate.ddl-auto = create-drop
+ spring.jpa.properties.hibernate.format_sql=false_
+ 
+ spring.datasource.hikari.connection-timeout=30000
+Index: target/classes/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/target/classes/application.properties b/target/classes/application.properties
+--- a/target/classes/application.properties	(revision 1b406a93c1b6b8f0b3ffc5308345c36da37eef51)
++++ b/target/classes/application.properties	(revision cb16a6d583156f7cd52584614abca64f075f69ae)
+@@ -7,7 +7,7 @@
+ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+ spring.jpa.show-sql = true
+ #spring.jpa.hibernate.ddl-auto = update
+-spring.jpa.hibernate.ddl-auto = none
++spring.jpa.hibernate.ddl-auto = create-drop
+ spring.jpa.properties.hibernate.format_sql=false_
+ 
+ spring.datasource.hikari.connection-timeout=30000
+Index: src/main/java/com/MainServer/Server_V2/modeB/model/MedicineView.java
+===================================================================
+diff --git a/src/main/java/com/MainServer/Server_V2/modeB/model/MedicineView.java b/src/main/java/com/MainServer/Server_V2/modeB/model/MedicineView.java
+deleted file mode 100644
+--- a/src/main/java/com/MainServer/Server_V2/modeB/model/MedicineView.java	(revision 1b406a93c1b6b8f0b3ffc5308345c36da37eef51)
++++ /dev/null	(revision 1b406a93c1b6b8f0b3ffc5308345c36da37eef51)
+@@ -1,7 +0,0 @@
+-package com.MainServer.Server_V2.modeB.model;
+-
+-public class MedicineView {
+-    long id;
+-
+-
+-}
+Index: src/main/java/com/MainServer/Server_V2/modeB/model/TimeView.java
+===================================================================
+diff --git a/src/main/java/com/MainServer/Server_V2/modeB/model/TimeView.java b/src/main/java/com/MainServer/Server_V2/modeB/model/TimeView.java
+deleted file mode 100644
+--- a/src/main/java/com/MainServer/Server_V2/modeB/model/TimeView.java	(revision 1b406a93c1b6b8f0b3ffc5308345c36da37eef51)
++++ /dev/null	(revision 1b406a93c1b6b8f0b3ffc5308345c36da37eef51)
+@@ -1,4 +0,0 @@
+-package com.MainServer.Server_V2.modeB.model;
+-
+-public class TimeView {
+-}
+diff --git a/target/classes/com/MainServer/Server_V2/modeB/model/view/MedicineView.class b/target/classes/com/MainServer/Server_V2/modeB/model/view/MedicineView.class
+new file mode 100644
+index 0000000000000000000000000000000000000000..0c1beb30cfb1a458a7d3b31949f433fe4106a6ad
+GIT binary patch
+literal 1502
+zc$}S+ZEMp|6vzKJP206g?b@#G9^HISGq;E@M4Sjt5G?ByDg|Fj)`l*lX&}v}A4<W2
+zMev0mzz-#!dy>U2OW#P~-h1vj=YM|p+?(Hje*OY*fJa3r$mF4F$Ra1ObZVVj=Exck
+z&9}#=c0UlvJ$J@V@IoM?w|WIEppZvV!y+_+Cw<Q~JC-x<+Wxuio8k1a_t<p3fqlT^
+z$UJxKPiDs+IDKbq_s9@XoPmI7OSu~w%2*P}yY}G7a&3X?;XjIQ;5*~tz6`8ts9{;4
+zK!Gn^?`%wPqANWO4Nd7;AkTsK`N$J!>h0?)-BwRPeML|L<wJrwI&+V0|GjlQ;<8@f
+z8ucvSk#@AH1}Dx$;OXK2ophgC+OdNZZ}86Y>2QJVlUhTc!<HS|!J7fMx=q$3v{bz<
+zokenXE_<}Bx2|glEKWEkYJ#e>>f&&AleD`eHklEtr|`%`Elj*@wl=w97Q5b=-?v{o
+zvQL%SQ}0PN+@hON=#{B7(rclWB5#^!x-On;JQqQS#R}Q0WVy(Y1=Nin5XRONd1H5q
+zl2KQus9bQ`8jTGO(n!990&dV(Cb1=~)2>0gB!CTU0=$v{f>#nD!z)=_#Z6k5G86!E
+zfi}T3TM^9%`GZIw)9gr)jVl~gu2rG2N*p!fSZ0RpFfC>%b7jFRSy|!A1!bn{HuX$!
+zRg>H@G;4fE{%c$-$D0k-56_d0^aXC?PK5l7D$CkAZr(*AyUE!NzM5Q2my0?inX-br
+zA#fM>VjdCml)fbtS5kTI<3Y@$gw>4oDe6g{)j2%!iNrijmekQo;i-Q~D6XaQ7}&YS
+uBd;^bvp$C>yuFC0%#sgNc`8YsjZ~i9^!`+mJezZPYP0<b-_IVWntuU#J<=xt
+
+diff --git a/target/classes/com/MainServer/Server_V2/modeB/model/view/ReminderView.class b/target/classes/com/MainServer/Server_V2/modeB/model/view/ReminderView.class
+new file mode 100644
+index 0000000000000000000000000000000000000000..dc27013952eccf8bc72d075d4d03978ada50752d
+GIT binary patch
+literal 2324
+zc$}qGe^VP(6g@8i7Pd<X;YWqGG>w2EK%=O&5=0?NOHH6{C~d6{^GKes&1RR`yddcK
+zJ^atF(9T%u;EW%@59N5@+a&~u9ni_lzWZ+Oz31Gs_r3k=@54U<EaE#85kw8NS!hQG
+zL+l0L<r#;&Tbb3(7osE?I_7NGmh%kJ)Wo`hPKG`mRF}4sS@3<npSNq$gn?)mF2OR;
+zZQ(L{7;cxmYNo(#w<!Ew;b($nV|^x5^~z#VKb_33Eq=&65>?wR3xAz94DHgciW;%W
+zA0sJ{tODq@5Jw+FXH}H#lI;qHO#WO*g)kv&VgQ2%u2^^nLk!aw$|ibSLN1pX;;D)J
+zv0i!4-O`n>TDXSmBpih;dV5;9qWa^8g#>OgnDhr#Tj5nI)_<Z%QTnzna|!QS7{wSv
+z7cZ9|);*~N8Bd*!ZJ9oR_bj9o3o8IysCspm-clNq2Bs`b<JO6{9b_^XyWFXZ)$dPX
+z1;fw^D^7FtzJ(7k!*Hd_D<bE)B`%-Xa+|E0<gO&*_fw~pDxNLX!qu|5G(NKMF>aH@
+zrETsn(2%yJmM3y?Fx*j8lxjtL%jL4}lf+A>#%S(*<Dv(1jV4hIWp+Nxu$a2wpq-xI
+ziFKlyqZo#sJO!-OtDC}K<C_k7;(4#coptWpY9Bh=<hD)v-MIke=ChPl6>K$UgD0!+
+z?;Ih-3PNss<p<oSd6dE@w7vh?=YJGfsWWp?XqD6{y`%YMTnTw*Xc)SSl9wt4z7w`>
+z7QMP(5=*w)^fqgDOJ$QTi=HQI(&syYK($V+Fcf}D(!H}`my?Ov1e?;EO>b|*^_m<m
+zDH&`Nde8OYJM!quO>chg!~?n>k}TQNfk!5aSTpcgO)xbzdfbHV?s^pw_7a@0C0>%A
+zzt8YX^T`SW1H$*XTXsZkH1Bzp`cC$&DF2qIhNDIJ^S9pzVTl}foT4oSNp3B>uJCgX
+zuhm4&z%z!ib5S+$oMGhcp>+0xVBDm;GD4S7gnsm4&=!4u=q~tF+p}mRyB%3XF-M*s
+zX^ql4oPGnA{sYFdH|Tl|Gd=klvGf#Kujt<>KBMO#<pCB|FsWiU`l<2|S@Yyg1Xb`k
+zz5ukP(3!RtC?-OmSCxC@nI%t->@GzU<UmO9OHJ=9vJ}0?R93Y!(2CwGouHV-i4)Kp
+zGK&+le$8qyNN%ti2w5rQcBYZ(LL||cMyn9AA~>D?4Y33C2g`6eSVs<!46Jcl%-=C_
+zhz#(u!D1L4^t?(euF+e#PDms4yn!k5%{RKA4%tN12Q6&#seWHT-(>UvAI6fu!kj$B
+zCscg$WkdeUTH;Y^ag16WZ)&iw(O@6$;vT^)>nzrL)ahNlzpr7xMqXEo;2}j8^m7$Y
+O$Y+xE6yM-m4E+Ni9z>)7
+
+diff --git a/target/classes/com/MainServer/Server_V2/modeB/model/view/TimeView.class b/target/classes/com/MainServer/Server_V2/modeB/model/view/TimeView.class
+new file mode 100644
+index 0000000000000000000000000000000000000000..8149dcca6a51562fe3c6fbf76f40edefd5e6081a
+GIT binary patch
+literal 2157
+zc$}4$>uwuG6vzMLyO(vG*oi|)FTwQU*lpZ~a!X1fF%609v_-az5Fe_EJxaE*cca~L
+zP=$C8zVQMewGt^(KJWlM6zZATwH;qlfh^6QIeX@u-~7+a`k#N#{sypxrv^d@#}P3R
+zMT}wg1wY~C4z~}=PxoJlmSl)Muxv{{WC#~lnn@&(jKeVT9!!R{meVcoam%g?_e8j5
+z|M9%JR_;1&v8BgO`NR@Gl^a%9G|6CyOEUL&+YGF#^39k?W0oPQ{VI+jQyYTRrEA#-
+z8!9woB8z!q;$5d_6CA4><j$E`#QT(ix7*+K94S18n}x{~E0eAa$?$=RC0u4$?D8W~
+zaqJeC-&^vKEKhP<QnEs!I=QqyC7pq*xE9B<i4Tz<k<$+#^wuGFHwisb*j=e)z;Ioa
+zC;G+dMVb^^AsrdgHOm%Hdfk2DHu!!=%jC3pr^#JQ%>!pd9$LhFzxMx|vq8vvLLNHp
+zXWZpoA%#nsa#N(#T*iTrjeaxfcvQ*dopVJBRTXCT!~EXP7p4eDQQk<@!nFQTvLq$j
+z47yJx>*Vo<o=8E1C8X2Wn{kFzUGmn^9zPBgGU`sxZHaA5O;Y{Muc~?^z?S1kPrCfr
+zSHer+YlhXI^ZIx`x7zvT^<{QDn5r>w_-9g2eo0`9@bWC5j^P^vkFXubx2n%O)bHWG
+zEc?Vc62bQTlef)V(s5rh{CZx1AkZh;;dZ+tyz4c`IqDs6OzL#e!p6&EF(v%R+W4&>
+zxhX-43h#94mK3U0yS6RdN{4%%@ZxyPaN|Fr#<9n6_1&R#L;PU6K?(Xe0bv^HYeQB@
+zeJJ#kz5?_#==MZ$gXTAB)}_cOJr|09ffcWvB3`_6id1nSa*Davdf6=+b2=!22$J+O
+zFhj}bDSd&wMe<SttdIq5slrTKs&rUes(1t?vQuFS0KEb^p=oXhG(V^ht9qwtN($ui
+z2uDWOO3^q&9BCS7HN&#MY`~D#m6^6w<&dtN44tcb2dgxys%3huLZih$5&vUQE2f<p
+zo!{S2G|10r$=v{Xohqx^F)iNfvDI0<I;UF_8_>l9g%neiX*C$`VQs*}20W=(V;SeC
+z@_dZ@1D=pyP0KgVvv2{AuU5d5)+s;1r&D<5ejm%2o67SUKA+%O8tJ6Jdhr4t)w2PQ
+z->)wQ`s`5qb!pYFq7vy1onK-*!zExS*o<z>5*?H)wDF~Lpt+z_Nc{x{pp5`DTMECy
+zmD&7nFiL0mh!U1w=?isBUmg{b#~i&Fl4l3xS=z5sazn3RbNwx>>-hs+@=H9_a3NGE
+S@+&=VVmG*&Rn+hVm)-)+wUK84
+

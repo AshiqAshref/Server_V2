@@ -47,6 +47,13 @@ public class Medicine {
         this.medName = med_name.trim();
         this.medAmount = medAmount;
     }
+    public Medicine(long id, String med_name, short medBoxNo, short medAmount){
+        this.id = id;
+        this.medBoxNo = medBoxNo;
+        this.medName = med_name.trim();
+        this.medAmount = medAmount;
+    }
+
 
     public void addTime(Time time, short dosage) {
         ReminderB reminder = new ReminderB(this, time, dosage);
@@ -68,16 +75,6 @@ public class Medicine {
             }
         }
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Medicine)) return false;
-
-        return id != null && id.equals(((Medicine) o).getId());
-    }
-    @Override
-    public int hashCode() {return getClass().hashCode();}
 
     public List<ReminderB> getTimes(){return times;}
     public void setId(Long med_id) {this.id = med_id;}
@@ -105,4 +102,14 @@ public class Medicine {
             return '\"'+a+'\"';
         return a;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Medicine)) return false;
+
+        return id != null && id.equals(((Medicine) o).getId());
+    }
+    @Override
+    public int hashCode() {return getClass().hashCode();}
 }
