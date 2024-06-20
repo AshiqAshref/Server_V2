@@ -14,28 +14,28 @@ public class ReminderView {
     private List<TimeView> times = new ArrayList<>();
 
     public ReminderView(Medicine medicine, List<TimeView> time){
-        this.medId = medicine.getId();
-        this.medName = medicine.getMedName();
-        this.medBox = medicine.getBox();
-        this.medAmount = medicine.getMedAmount();
+        this.medId = medicine.getMed_id();
+        this.medName = medicine.getMed_Name();
+        this.medBox = medicine.getMed_box_no();
+        this.medAmount = medicine.getMed_amount();
         this.times = time;
     }
 
     public ReminderView(Medicine medicine){
-        this.medId = medicine.getId();
-        this.medName = medicine.getMedName();
-        this.medBox = medicine.getBox();
-        this.medAmount = medicine.getMedAmount();
+        this.medId = medicine.getMed_id();
+        this.medName = medicine.getMed_Name();
+        this.medBox = medicine.getMed_box_no();
+        this.medAmount = medicine.getMed_amount();
     }
     public ReminderView(){}
 
     @JsonIgnore
     public Medicine getMedicine() {return new Medicine(medId, medName, medBox, medAmount);}
     public void setMedicine(Medicine medicine) {
-        this.medId = medicine.getId();
-        this.medName = medicine.getMedName();
-        this.medBox = medicine.getBox();
-        this.medAmount = medicine.getMedAmount();
+        this.medId = medicine.getMed_id();
+        this.medName = medicine.getMed_Name();
+        this.medBox = medicine.getMed_box_no();
+        this.medAmount = medicine.getMed_amount();
     }
     public long getMed_id() {return medId;}
     public void setMed_id(long medId) {this.medId = medId;}

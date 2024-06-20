@@ -158,8 +158,8 @@ public class ReminderBServiceTest {
 
 
     private Medicine saveMedicine(Medicine medicine) {
-        return medicineRepository.findMedicineByMedName(medicine.getMedName()).orElse(
-                medicineRepository.findMedicineByMedBoxNo(medicine.getBox()).orElse(
+        return medicineRepository.findMedicineByMedName(medicine.getMed_Name()).orElse(
+                medicineRepository.findMedicineByMedBoxNo(medicine.getMed_box_no()).orElse(
                         medicineRepository.save(medicine)
                 )
         );
@@ -171,7 +171,7 @@ public class ReminderBServiceTest {
         for (int i = 1; i <= 16; i++){
             boxes.add((short)i);
             for(Medicine med : medicines)
-                if(i==(int)med.getBox())
+                if(i==(int)med.getMed_box_no())
                     boxes.removeLast();
         }
         short boxNo = boxes.remove((int) faker.random().nextInt(0, boxes.size() - 1));

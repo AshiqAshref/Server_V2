@@ -1,6 +1,7 @@
 package com.MainServer.Server_V2.modeB.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Iterator;
@@ -75,16 +76,16 @@ public class Medicine {
             }
         }
     }
-
+    @JsonIgnore
     public List<ReminderB> getTimes(){return times;}
-    public void setId(Long med_id) {this.id = med_id;}
-    public Long getId() {return id;}
-    public String getMedName() {return medName;}
-    public void setMedName(String medName) {this.medName = medName.trim();}
-    public short getMedAmount() {return medAmount;}
-    public void setMedAmount(short medAmount) {this.medAmount = medAmount;}
-    public  short getBox() {return medBoxNo;}
-    public void setBox(short box) {this.medBoxNo = box;}
+    public void setMed_id(Long med_id) {this.id = med_id;}
+    public Long getMed_id() {return id;}
+    public String getMed_Name() {return medName;}
+    public void setMed_Name(String medName) {this.medName = medName.trim();}
+    public short getMed_amount() {return medAmount;}
+    public void setMed_amount(short medAmount) {this.medAmount = medAmount;}
+    public  short getMed_box_no() {return medBoxNo;}
+    public void settMed_box_no(short box) {this.medBoxNo = box;}
 
 
 
@@ -108,7 +109,7 @@ public class Medicine {
         if (this == o) return true;
         if (!(o instanceof Medicine)) return false;
 
-        return id != null && id.equals(((Medicine) o).getId());
+        return id != null && id.equals(((Medicine) o).getMed_id());
     }
     @Override
     public int hashCode() {return getClass().hashCode();}

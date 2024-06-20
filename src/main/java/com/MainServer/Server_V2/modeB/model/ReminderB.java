@@ -28,7 +28,7 @@ import java.util.Objects;
     public ReminderB(Medicine medicine, Time time, short rembDosage){
         this.medicine = medicine;
         this.time = time;
-        this.reminderbId = new ReminderbId(medicine.getId(), time.getTimeb_Id());
+        this.reminderbId = new ReminderbId(medicine.getMed_id(), time.getTimeb_Id());
         this.rembDosage = rembDosage;
     }
 

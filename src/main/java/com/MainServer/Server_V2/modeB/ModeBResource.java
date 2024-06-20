@@ -38,7 +38,7 @@ public class ModeBResource {
     }
 
 
-    @GetMapping("medicine/all")
+    @GetMapping("medicines/all")
     public ResponseEntity<List<Medicine>> getAllmedicines(){
         return new ResponseEntity<>(reminderBService.getAllMedicines(), HttpStatus.OK);
     }

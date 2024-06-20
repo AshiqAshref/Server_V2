@@ -46,26 +46,32 @@ public class ReminderBService  {
     public List<ReminderView> getAllReminders(){
         return reminderBtoReminderView(medicineRepository.findAll());
     }
-    public ReminderView addReminder(ReminderView reminderRecived){
-        Medicine medicine = medicineRepository.findById(reminderRecived.getMed_id()).orElseThrow(RuntimeException::new);
-        Iterator<TimeView> timeRecivedIter = reminderRecived.getTimes().iterator();
-        for (ReminderB reminderExisting : medicine.getTimes()) {
+
+    public ReminderView addReminder(ReminderView reminderReceived){
+        Medicine medicine = medicineRepository.findById(reminderReceived.getMed_id()).orElseThrow(RuntimeException::new);
+        Iterator<TimeView> remindersReceived = reminderReceived.getTimes().iterator();
+        Iterator<ReminderB> remindersExisting = medicine.getTimes().iterator();
+        while(remindersExisting.hasNext()){
+            ReminderB reminderExisting = remindersExisting.next();
             boolean deleteReminder = true;
-            while (timeRecivedIter.hasNext()) {
-                TimeView timeRecived = timeRecivedIter.next();
-                if (reminderExisting.getTime().getTimeb_time().equals(timeRecived.getTimeb_time())) {
+            while(remindersReceived.hasNext()){
+                TimeView timeRecived = remindersReceived.next();
+                if(reminderExisting.getTime().getTimeb_time().equals(timeRecived.getTimeb_time())){
                     reminderExisting.setDosage(timeRecived.getDosage());
                     deleteReminder = false;
-                    timeRecivedIter.remove();
+                    remindersReceived.remove();
                 }
             }
-            if (deleteReminder)
+            if(deleteReminder)
                 medicine.removeTime(reminderExisting.getTime());
         }
-
-
-        return null;
+        while(remindersReceived.hasNext()){
+            TimeView timeRecived = remindersReceived.next();
+            medicine.addTime(getOrCreateTime(timeRecived.getTimeb_time()),timeRecived.getDosage());
+        }
+        return reminderBtoReminderView(medicineRepository.save(medicine));
     }
+
 
     private long checkIfTimeExists(Medicine medicine, String time){
         for(ReminderB rTime : medicine.getTimes())
@@ -130,11 +136,15 @@ public class ReminderBService  {
     }
 
     private void checkIfMedicineGood(Medicine medicine) {
-        if(medicineRepository.findMedicineByMedName(medicine.getMedName()).isPresent())
-            throw new DuplicateValueException("Medicine with name " + medicine.getMedName() + " already exists");
-        Optional<Medicine> medicineOptional =  medicineRepository.findMedicineByMedBoxNo(medicine.getBox());
+        if(medicineRepository.findMedicineByMedName(medicine.getMed_Name()).isPresent())
+            throw new DuplicateValueException("Medicine with name " + medicine.getMed_Name() + " already exists");
+        Optional<Medicine> medicineOptional =  medicineRepository.findMedicineByMedBoxNo(medicine.getMed_box_no());
         if(medicineOptional.isPresent())
-            throw new DuplicateValueException(medicineOptional.get().getMedName()+" is in box no" + medicine.getBox() + " already exists");
+            throw new DuplicateValueException(medicineOptional.get().getMed_Name()+" is in box no" + medicine.getMed_box_no() + " already exists");
+    }
+
+    private void getOrCreateMedicine(){
+
     }
 
 
