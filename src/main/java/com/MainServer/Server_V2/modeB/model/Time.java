@@ -2,7 +2,6 @@ package com.MainServer.Server_V2.modeB.model;
 
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
 
@@ -53,11 +52,11 @@ public class Time {
         return this.medicines;
     }
 
-    public Long getId() {return timebId;}
-    public void setId(Long id) {this.timebId = id;}
+    public Long getTimeb_Id() {return timebId;}
+    public void setTimeb_Id(Long id) {this.timebId = id;}
 
-    public String getTime() {return timebTime; }
-    public void setTime(String time) {this.timebTime = time.trim();}
+    public String getTimeb_time() {return timebTime; }
+    public void setTimeb_time(String time) {this.timebTime = time.trim();}
 
     @Override
     public boolean equals(Object o) {

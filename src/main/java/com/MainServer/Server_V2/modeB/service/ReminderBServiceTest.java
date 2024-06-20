@@ -81,7 +81,7 @@ public class ReminderBServiceTest {
         return medicines;
     }
     private Time saveTime(Time time){
-        return timeRepository.findTimeByTimebTime(time.getTime()).orElse(timeRepository.save(time));
+        return timeRepository.findTimeByTimebTime(time.getTimeb_time()).orElse(timeRepository.save(time));
     }
     private List<Time> generateRandomTimes(int numberOfTimes, boolean byFives){
         List<Time> times = new ArrayList<>();
@@ -90,12 +90,12 @@ public class ReminderBServiceTest {
             if (byFives) time = new Time(getRandomTimeof5());
             else time = new Time(getRandomTime());
 
-            Optional<Time> timeOptional = timeRepository.findTimeByTimebTime(time.getTime());
+            Optional<Time> timeOptional = timeRepository.findTimeByTimebTime(time.getTimeb_time());
             if (timeOptional.isPresent()){
-                if (!checkTimesforTime(timeOptional.get().getTime(), times))
+                if (!checkTimesforTime(timeOptional.get().getTimeb_time(), times))
                     times.add(timeOptional.get());
             }else{
-                if(!checkTimesforTime(time.getTime(), times))
+                if(!checkTimesforTime(time.getTimeb_time(), times))
                     times.add(time);
             }
         }
@@ -121,7 +121,7 @@ public class ReminderBServiceTest {
 
     private boolean checkTimesforTime(String time, List<Time> times){
         for(Time t : times)
-            if(t.getTime().equals(time))
+            if(t.getTimeb_time().equals(time))
                 return true;
         return false;
     }

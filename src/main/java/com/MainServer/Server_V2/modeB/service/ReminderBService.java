@@ -12,19 +12,13 @@ import com.MainServer.Server_V2.modeB.repository.ReminderBRepository;
 import com.MainServer.Server_V2.modeB.repository.TimeRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 //import org.springframework.transaction.annotation.Transactional;
 
 
-
-import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @Service
 
@@ -52,6 +46,45 @@ public class ReminderBService  {
     public List<ReminderView> getAllReminders(){
         return reminderBtoReminderView(medicineRepository.findAll());
     }
+    public ReminderView addReminder(ReminderView reminderRecived){
+        Medicine medicine = medicineRepository.findById(reminderRecived.getMed_id()).orElseThrow(RuntimeException::new);
+        Iterator<TimeView> timeRecivedIter = reminderRecived.getTimes().iterator();
+        for (ReminderB reminderExisting : medicine.getTimes()) {
+            boolean deleteReminder = true;
+            while (timeRecivedIter.hasNext()) {
+                TimeView timeRecived = timeRecivedIter.next();
+                if (reminderExisting.getTime().getTimeb_time().equals(timeRecived.getTimeb_time())) {
+                    reminderExisting.setDosage(timeRecived.getDosage());
+                    deleteReminder = false;
+                    timeRecivedIter.remove();
+                }
+            }
+            if (deleteReminder)
+                medicine.removeTime(reminderExisting.getTime());
+        }
+
+
+        return null;
+    }
+
+    private long checkIfTimeExists(Medicine medicine, String time){
+        for(ReminderB rTime : medicine.getTimes())
+            if(rTime.getTime().getTimeb_time().equals(time))
+                return rTime.getTime().getTimeb_Id();
+        return 0L;
+    }
+
+    private Time getOrCreateTime(String timeb_time){
+        Time time = new Time(timeb_time);
+        return timeRepository.findTimeByTimebTime(timeb_time)
+                .orElse(timeRepository.save(time));
+    }
+
+
+
+
+
+
     private ReminderView reminderBtoReminderView(Medicine medicine){
         ReminderView reminder = new ReminderView(medicine);
         for(ReminderB reminderB : medicine.getTimes())
@@ -65,9 +98,7 @@ public class ReminderBService  {
         return reminders;
     }
 
-    public ReminderView addReminder(ReminderView reminder){
-        return null;
-    }
+
     public ReminderView updateReminder(ReminderView reminder){
         return null;
     }

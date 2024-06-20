@@ -1,6 +1,7 @@
 package com.MainServer.Server_V2.modeB.model.view;
 
 import com.MainServer.Server_V2.modeB.model.Medicine;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class ReminderView {
     }
     public ReminderView(){}
 
+    @JsonIgnore
     public Medicine getMedicine() {return new Medicine(medId, medName, medBox, medAmount);}
     public void setMedicine(Medicine medicine) {
         this.medId = medicine.getId();
@@ -35,14 +37,14 @@ public class ReminderView {
         this.medBox = medicine.getBox();
         this.medAmount = medicine.getMedAmount();
     }
-    public long getMedId() {return medId;}
-    public void setMedId(long medId) {this.medId = medId;}
-    public String getMedName() {return medName;}
-    public void setMedName(String medName) {this.medName = medName;}
-    public short getMedBox() {return medBox;}
-    public void setMedBox(short medBox) {this.medBox = medBox;}
-    public short getMedAmount() {return medAmount;}
-    public void setMedAmount(short medAmount) {this.medAmount = medAmount;}
+    public long getMed_id() {return medId;}
+    public void setMed_id(long medId) {this.medId = medId;}
+    public String getMed_name() {return medName;}
+    public void setMed_name(String medName) {this.medName = medName;}
+    public short getMed_box_no() {return medBox;}
+    public void setMed_box_no(short medBox) {this.medBox = medBox;}
+    public short getMed_amount() {return medAmount;}
+    public void setMed_amount(short medAmount) {this.medAmount = medAmount;}
 
     public List<TimeView> getTimes() {return times;}
     public void setTimes(List<TimeView> times) {this.times = times;}
