@@ -42,7 +42,7 @@ public class ReminderBServiceTest {
     public void test(int a){
         List<Medicine> meds = medicineRepository.findAll();
         try {
-            System.out.println(meds);
+            System.out.println(reminderBtoReminderView(meds));
         }catch (Exception e){
             e.printStackTrace();
         }

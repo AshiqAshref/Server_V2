@@ -26,7 +26,7 @@ public class ServerV2Application {
 		return args ->{
 			try{
 
-				reminderBServiceTest.test(2);
+//				reminderBServiceTest.test(2);
 //				reminderAService.addRandom(5);
 			}catch(Exception e){
 				e.printStackTrace();
