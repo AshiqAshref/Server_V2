@@ -45,13 +45,13 @@ public class Medicine {
     public Medicine(){}
     public Medicine(String med_name, int medBoxNo, int medAmount){
         this.medBoxNo = (short)medBoxNo;
-        this.medName = med_name.trim();
+        this.medName = med_name.trim().toUpperCase();
         this.medAmount = (short)medAmount;
     }
     public Medicine(long id, String med_name, int medBoxNo, int medAmount){
         this.id = id;
         this.medBoxNo = (short)medBoxNo;
-        this.medName = med_name.trim();
+        this.medName = med_name.trim().toUpperCase();
         this.medAmount = (short)medAmount;
     }
 
@@ -82,8 +82,8 @@ public class Medicine {
     public Long getMed_id() {return id;}
     public void setMed_id(Long med_id) {this.id = med_id;}
 
-    public String getMed_name() {return medName;}
-    public void setMed_name(String medName) {this.medName = medName.trim();}
+    public String getMed_name() {return medName.toUpperCase();}
+    public void setMed_name(String medName) {this.medName = medName.trim().toUpperCase();}
 
     public  int getMed_box_no() {return medBoxNo;}
     public void setMed_box_no(int box) {this.medBoxNo = (short)box;}
