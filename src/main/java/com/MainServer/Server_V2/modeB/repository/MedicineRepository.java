@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface MedicineRepository extends JpaRepository<Medicine,Long> {
 
     Optional<Medicine> findMedicineByMedName(String medbName);
-    Optional<Medicine> findMedicineByMedBoxNo(short medbBoxNo);
+    Optional<Medicine> findMedicineByMedBoxNo(int medbBoxNo);
 
 //    @Transactional
 //    @Modifying

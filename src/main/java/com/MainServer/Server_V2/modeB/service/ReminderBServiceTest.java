@@ -153,12 +153,8 @@ public class ReminderBServiceTest {
         }return medicines;
     }
 
-
-
-
-
     private Medicine saveMedicine(Medicine medicine) {
-        return medicineRepository.findMedicineByMedName(medicine.getMed_Name()).orElse(
+        return medicineRepository.findMedicineByMedName(medicine.getMed_name()).orElse(
                 medicineRepository.findMedicineByMedBoxNo(medicine.getMed_box_no()).orElse(
                         medicineRepository.save(medicine)
                 )

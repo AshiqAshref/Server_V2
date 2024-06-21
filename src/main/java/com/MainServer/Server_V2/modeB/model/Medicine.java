@@ -43,21 +43,21 @@ public class Medicine {
 
 
     public Medicine(){}
-    public Medicine(String med_name, short medBoxNo, short medAmount){
-        this.medBoxNo = medBoxNo;
+    public Medicine(String med_name, int medBoxNo, int medAmount){
+        this.medBoxNo = (short)medBoxNo;
         this.medName = med_name.trim();
-        this.medAmount = medAmount;
+        this.medAmount = (short)medAmount;
     }
-    public Medicine(long id, String med_name, short medBoxNo, short medAmount){
+    public Medicine(long id, String med_name, int medBoxNo, int medAmount){
         this.id = id;
-        this.medBoxNo = medBoxNo;
+        this.medBoxNo = (short)medBoxNo;
         this.medName = med_name.trim();
-        this.medAmount = medAmount;
+        this.medAmount = (short)medAmount;
     }
 
 
-    public void addTime(Time time, short dosage) {
-        ReminderB reminder = new ReminderB(this, time, dosage);
+    public void addTime(Time time, int dosage) {
+        ReminderB reminder = new ReminderB(this, time, (short)dosage);
         times.add(reminder);
         time.getMedicines().add(reminder);
     }
@@ -78,14 +78,18 @@ public class Medicine {
     }
     @JsonIgnore
     public List<ReminderB> getTimes(){return times;}
-    public void setMed_id(Long med_id) {this.id = med_id;}
+
     public Long getMed_id() {return id;}
-    public String getMed_Name() {return medName;}
-    public void setMed_Name(String medName) {this.medName = medName.trim();}
-    public short getMed_amount() {return medAmount;}
-    public void setMed_amount(short medAmount) {this.medAmount = medAmount;}
-    public  short getMed_box_no() {return medBoxNo;}
-    public void settMed_box_no(short box) {this.medBoxNo = box;}
+    public void setMed_id(Long med_id) {this.id = med_id;}
+
+    public String getMed_name() {return medName;}
+    public void setMed_name(String medName) {this.medName = medName.trim();}
+
+    public  int getMed_box_no() {return medBoxNo;}
+    public void setMed_box_no(int box) {this.medBoxNo = (short)box;}
+
+    public int getMed_amount() {return medAmount;}
+    public void setMed_amount(int medAmount) {this.medAmount = (short)medAmount;}
 
 
 

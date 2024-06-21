@@ -15,17 +15,17 @@ public class ReminderView {
 
     public ReminderView(Medicine medicine, List<TimeView> time){
         this.medId = medicine.getMed_id();
-        this.medName = medicine.getMed_Name();
-        this.medBox = medicine.getMed_box_no();
-        this.medAmount = medicine.getMed_amount();
+        this.medName = medicine.getMed_name();
+        this.medBox = (short)medicine.getMed_box_no();
+        this.medAmount =(short) medicine.getMed_amount();
         this.times = time;
     }
 
     public ReminderView(Medicine medicine){
         this.medId = medicine.getMed_id();
-        this.medName = medicine.getMed_Name();
-        this.medBox = medicine.getMed_box_no();
-        this.medAmount = medicine.getMed_amount();
+        this.medName = medicine.getMed_name();
+        this.medBox = (short)medicine.getMed_box_no();
+        this.medAmount = (short)medicine.getMed_amount();
     }
     public ReminderView(){}
 
@@ -33,18 +33,18 @@ public class ReminderView {
     public Medicine getMedicine() {return new Medicine(medId, medName, medBox, medAmount);}
     public void setMedicine(Medicine medicine) {
         this.medId = medicine.getMed_id();
-        this.medName = medicine.getMed_Name();
-        this.medBox = medicine.getMed_box_no();
-        this.medAmount = medicine.getMed_amount();
+        this.medName = medicine.getMed_name();
+        this.medBox = (short)medicine.getMed_box_no();
+        this.medAmount = (short)medicine.getMed_amount();
     }
     public long getMed_id() {return medId;}
     public void setMed_id(long medId) {this.medId = medId;}
     public String getMed_name() {return medName;}
     public void setMed_name(String medName) {this.medName = medName;}
-    public short getMed_box_no() {return medBox;}
-    public void setMed_box_no(short medBox) {this.medBox = medBox;}
-    public short getMed_amount() {return medAmount;}
-    public void setMed_amount(short medAmount) {this.medAmount = medAmount;}
+    public int getMed_box_no() {return medBox;}
+    public void setMed_box_no(int medBox) {this.medBox = (short)medBox;}
+    public int getMed_amount() {return medAmount;}
+    public void setMed_amount(int medAmount) {this.medAmount =(short)medAmount;}
 
     public List<TimeView> getTimes() {return times;}
     public void setTimes(List<TimeView> times) {this.times = times;}

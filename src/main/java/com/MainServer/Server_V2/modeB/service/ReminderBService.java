@@ -12,6 +12,7 @@ import com.MainServer.Server_V2.modeB.repository.ReminderBRepository;
 import com.MainServer.Server_V2.modeB.repository.TimeRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 //import org.springframework.transaction.annotation.Transactional;
 
@@ -47,6 +48,7 @@ public class ReminderBService  {
         return reminderBtoReminderView(medicineRepository.findAll());
     }
 
+    @Transactional
     public ReminderView addReminder(ReminderView reminderReceived){
         Medicine medicine = medicineRepository.findById(reminderReceived.getMed_id()).orElseThrow(RuntimeException::new);
         Iterator<TimeView> remindersReceived = reminderReceived.getTimes().iterator();
@@ -88,9 +90,6 @@ public class ReminderBService  {
 
 
 
-
-
-
     private ReminderView reminderBtoReminderView(Medicine medicine){
         ReminderView reminder = new ReminderView(medicine);
         for(ReminderB reminderB : medicine.getTimes())
@@ -105,46 +104,50 @@ public class ReminderBService  {
     }
 
 
-    public ReminderView updateReminder(ReminderView reminder){
-        return null;
-    }
-    public void deleteReminder(long medbId, long timebId){
+    public ReminderView updateReminder(ReminderView reminder){return null;}
+    public void deleteReminder(long medbId, long timebId){}
 
-    }
-
-
-
-
-
+    @Transactional
     public Medicine addMedicine(Medicine medicine)  {
-        checkIfMedicineGood(medicine);
-        medicineRepository.save(medicine);
-        return medicine;
-    }
-
-    public void deleteMedicine(Long id) {
-        medicineRepository.deleteById(id);
-    }
-
-    public Medicine updateMedicine(Medicine medicine)  {
         checkIfMedicineGood(medicine);
         return medicineRepository.save(medicine);
     }
 
+    @Transactional
+    public void deleteMedicine(Long id) {
+        medicineRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Medicine updateMedicine(Medicine medicineToUpdate)  {
+        checkIfMedicineGood(medicineToUpdate);
+        Medicine medicine = medicineRepository.findById(medicineToUpdate.getMed_id()).orElseThrow(()-> new DuplicateValueException("Couldnt find med_id to Update"));
+        medicine.setMed_amount(medicineToUpdate.getMed_amount());
+        medicine.setMed_box_no(medicineToUpdate.getMed_box_no());
+        medicine.setMed_name(medicineToUpdate.getMed_name());
+        return medicineRepository.save(medicine);
+    }
+
+    @Transactional
     public List<Medicine> getAllMedicines(){
         return medicineRepository.findAll();
     }
 
     private void checkIfMedicineGood(Medicine medicine) {
-        if(medicineRepository.findMedicineByMedName(medicine.getMed_Name()).isPresent())
-            throw new DuplicateValueException("Medicine with name " + medicine.getMed_Name() + " already exists");
-        Optional<Medicine> medicineOptional =  medicineRepository.findMedicineByMedBoxNo(medicine.getMed_box_no());
-        if(medicineOptional.isPresent())
-            throw new DuplicateValueException(medicineOptional.get().getMed_Name()+" is in box no" + medicine.getMed_box_no() + " already exists");
+        if(medicineRepository.findMedicineByMedName(medicine.getMed_name()).isPresent())
+            throw new DuplicateValueException("Medicine with name " + medicine.getMed_name() + " already exists");
+        Optional<Medicine> medicineByBoxOptional =  medicineRepository.findMedicineByMedBoxNo(medicine.getMed_box_no());
+        if(medicineByBoxOptional.isPresent())
+            if(!medicineByBoxOptional.get().getMed_id().equals(medicine.getMed_id()))
+                throw new DuplicateValueException(medicineByBoxOptional.get().getMed_name()+" is in box no " + medicine.getMed_box_no() + " already exists");
     }
 
-    private void getOrCreateMedicine(){
-
+    private Medicine getOrCreateMedicine(Medicine medicine){
+        return medicineRepository.findMedicineByMedName(medicine.getMed_name()).orElse(
+                medicineRepository.findMedicineByMedBoxNo(medicine.getMed_box_no()).orElse(
+                        medicineRepository.save(medicine)
+                )
+        );
     }
 
 
