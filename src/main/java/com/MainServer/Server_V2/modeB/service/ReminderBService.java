@@ -41,9 +41,6 @@ public class ReminderBService  {
     private EntityManager em;
 
 
-
-
-
     public List<ReminderView> getAllReminders(){
         return reminderBtoReminderView(medicineRepository.findAll());
     }
@@ -120,7 +117,11 @@ public class ReminderBService  {
 
     @Transactional
     public Medicine updateMedicine(Medicine medicineToUpdate)  {
-        checkIfMedicineGood(medicineToUpdate);
+        Optional<Medicine> medicineOptional = medicineRepository.findMedicineByMedName(medicineToUpdate.getMed_name());
+        if(medicineOptional.isPresent()){
+            if(medicineOptional.get().getMed_id()!= medicineToUpdate.getMed_id())
+                throw new DuplicateValueException("Medicine with name " + medicineToUpdate.getMed_name() + " already exists");
+        }
         Medicine medicine = medicineRepository.findById(medicineToUpdate.getMed_id()).orElseThrow(()-> new DuplicateValueException("Couldnt find med_id to Update"));
         medicine.setMed_amount(medicineToUpdate.getMed_amount());
         medicine.setMed_box_no(medicineToUpdate.getMed_box_no());
