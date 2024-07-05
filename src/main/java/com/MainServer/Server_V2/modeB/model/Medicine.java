@@ -61,6 +61,8 @@ public class Medicine {
         times.add(reminder);
         time.getMedicines().add(reminder);
     }
+    @JsonIgnore
+    public List<ReminderB> getTimes(){return times;}
 
     public void removeTime(Time time) {
         for (Iterator<ReminderB> iterator = times.iterator();
@@ -68,7 +70,7 @@ public class Medicine {
             ReminderB reminder = iterator.next();
 
             if (reminder.getMedicine().equals(this) &&
-                    reminder.getTime().equals(time)) {
+                    reminder.getTime().getTimeb_time().equals(time.getTimeb_time())) {
                 iterator.remove();
                 reminder.getTime().getMedicines().remove(reminder);
                 reminder.setMedicine(null);
@@ -76,8 +78,6 @@ public class Medicine {
             }
         }
     }
-    @JsonIgnore
-    public List<ReminderB> getTimes(){return times;}
 
     public Long getMed_id() {return id;}
     public void setMed_id(Long med_id) {this.id = med_id;}
@@ -93,15 +93,16 @@ public class Medicine {
 
 
 
-    @Override
-    public String toString() {
-        return "{"
-                + "\"med_id\" : "  + id
-                + ",\"med_box_no\" : "+ medBoxNo
-                + ",\"med_name\" : " +  addQuotes(medName)
-                + ", \"med_amount\" : " + medAmount
-                +"}";
-    }
+//    @Override
+//    public String toString() {
+//        return "{"
+//                + "\"med_id\" : "  + id
+//                + ", \"med_box_no\" : "+ medBoxNo
+//                + ", \"med_name\" : " +  addQuotes(medName)
+//                + ", \"med_amount\" : " + medAmount
+//                + ", \"times\" : " + getTimes()
+//                +"}";
+//    }
     private String addQuotes(String a) {
         if(a.charAt(0)!='\"')
             return '\"'+a+'\"';

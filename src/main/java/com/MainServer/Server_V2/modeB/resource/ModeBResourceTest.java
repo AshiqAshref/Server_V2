@@ -1,4 +1,4 @@
-package com.MainServer.Server_V2.modeB;
+package com.MainServer.Server_V2.modeB.resource;
 
 import com.MainServer.Server_V2.modeB.model.Medicine;
 import com.MainServer.Server_V2.modeB.service.ReminderBServiceTest;

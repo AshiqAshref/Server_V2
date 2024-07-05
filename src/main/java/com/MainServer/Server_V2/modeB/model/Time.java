@@ -74,8 +74,8 @@ public class Time {
     @Override
     public String toString() {
         return "{"
-                + "\"timeb_id\" : " + timebId
-                + ",\"timeb_time\" : " + addQuotes(timebTime)
+                + "\"time_id\" : " + timebId
+                + ",\"time\" : " + addQuotes(timebTime)
                 + "}";
     }
 

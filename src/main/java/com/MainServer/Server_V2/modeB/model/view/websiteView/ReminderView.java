@@ -1,4 +1,4 @@
-package com.MainServer.Server_V2.modeB.model.view;
+package com.MainServer.Server_V2.modeB.model.view.websiteView;
 
 import com.MainServer.Server_V2.modeB.model.Medicine;
 import com.fasterxml.jackson.annotation.JsonIgnore;

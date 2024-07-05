@@ -25,11 +25,11 @@ import java.util.Objects;
 
 
     public ReminderB(){}
-    public ReminderB(Medicine medicine, Time time, short rembDosage){
+    public ReminderB(Medicine medicine, Time time, int rembDosage){
         this.medicine = medicine;
         this.time = time;
         this.reminderbId = new ReminderbId(medicine.getMed_id(), time.getTimeb_Id());
-        this.rembDosage = rembDosage;
+        this.rembDosage = (short)rembDosage;
     }
 
     public ReminderbId getReminderbId() {
@@ -42,8 +42,17 @@ import java.util.Objects;
 
     public Time getTime() {return time;}
     public void setTime(Time time) {this.time = time;}
-    public short getDosage(){return rembDosage;}
-    public void setDosage(short dosage){this.rembDosage = dosage;}
+    public int getDosage(){return rembDosage;}
+    public void setDosage(int dosage){this.rembDosage = (short)dosage;}
+
+    @Override
+    public String toString() {
+        return "{"
+                + "\"time_id\" : " + getTime().getTimeb_Id()
+                + ", \"time\" : " + getTime().getTimeb_time()
+//                + ", \"dosage\" : " + getDosage()
+                + "}";
+    }
 
     @Override
     public boolean equals(Object o) {

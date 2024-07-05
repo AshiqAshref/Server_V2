@@ -5,8 +5,8 @@ import com.MainServer.Server_V2.exception.DuplicateValueException;
 import com.MainServer.Server_V2.modeB.model.Medicine;
 import com.MainServer.Server_V2.modeB.model.ReminderB;
 import com.MainServer.Server_V2.modeB.model.Time;
-import com.MainServer.Server_V2.modeB.model.view.ReminderView;
-import com.MainServer.Server_V2.modeB.model.view.TimeView;
+import com.MainServer.Server_V2.modeB.model.view.websiteView.ReminderView;
+import com.MainServer.Server_V2.modeB.model.view.websiteView.TimeView;
 import com.MainServer.Server_V2.modeB.repository.MedicineRepository;
 import com.MainServer.Server_V2.modeB.repository.ReminderBRepository;
 import com.MainServer.Server_V2.modeB.repository.TimeRepository;
@@ -48,28 +48,48 @@ public class ReminderBService  {
     @Transactional
     public ReminderView addReminder(ReminderView reminderReceived){
         Medicine medicine = medicineRepository.findById(reminderReceived.getMed_id()).orElseThrow(RuntimeException::new);
-        Iterator<TimeView> remindersReceived = reminderReceived.getTimes().iterator();
-        Iterator<ReminderB> remindersExisting = medicine.getTimes().iterator();
-        while(remindersExisting.hasNext()){
-            ReminderB reminderExisting = remindersExisting.next();
+        List<TimeView> recivedTimeeees = reminderReceived.getTimes();
+        Iterator<ReminderB> iterator = medicine.getTimes().iterator();
+        while(iterator.hasNext()){
+            ReminderB reminderExisting = iterator.next();
             boolean deleteReminder = true;
-            while(remindersReceived.hasNext()){
-                TimeView timeRecived = remindersReceived.next();
-                if(reminderExisting.getTime().getTimeb_time().equals(timeRecived.getTimeb_time())){
-                    reminderExisting.setDosage(timeRecived.getDosage());
+            Iterator<TimeView> receivedTimes = recivedTimeeees.iterator();
+            while (receivedTimes.hasNext()) {
+                TimeView receivedTime = receivedTimes.next();
+                if (reminderExisting.getTime().getTimeb_time().equals(receivedTime.getTime())) {
+                    reminderExisting.setDosage(receivedTime.getDosage());
                     deleteReminder = false;
-                    remindersReceived.remove();
+                    receivedTimes.remove();
                 }
             }
-            if(deleteReminder)
+            if (deleteReminder) {
+                iterator.remove();
                 medicine.removeTime(reminderExisting.getTime());
+            }
         }
-        while(remindersReceived.hasNext()){
-            TimeView timeRecived = remindersReceived.next();
-            medicine.addTime(getOrCreateTime(timeRecived.getTimeb_time()),timeRecived.getDosage());
+
+        medicineRepository.flush();
+        for (TimeView timeRecived : recivedTimeeees) {
+            Time time = getOrCreateTime(timeRecived.getTime());
+            medicine.addTime(time, timeRecived.getDosage());
+            medicineRepository.flush();
         }
+        cleanTimesTable();
         return reminderBtoReminderView(medicineRepository.save(medicine));
     }
+
+    @Transactional
+    public void cleanTimesTable(){
+        List<Time> times = timeRepository.findAll();
+        long count = times.size();
+        for(Time time : times){
+            if(time.getMedicines().isEmpty())
+                timeRepository.delete(time);
+        }
+        System.out.println("Cleaned Time Records : " + (count - timeRepository.count()));
+    }
+
+
 
 
     private long checkIfTimeExists(Medicine medicine, String time){
@@ -79,10 +99,14 @@ public class ReminderBService  {
         return 0L;
     }
 
-    private Time getOrCreateTime(String timeb_time){
-        Time time = new Time(timeb_time);
-        return timeRepository.findTimeByTimebTime(timeb_time)
-                .orElse(timeRepository.save(time));
+    @Transactional
+    public Time getOrCreateTime(String timeb_time){
+        Optional<Time> timeOPtional = timeRepository.findTimeByTimebTime(timeb_time.trim());
+        if(timeOPtional.isPresent())
+            return timeOPtional.get();
+        else
+            return timeRepository.save(new Time(timeb_time.trim()));
+//                .orElse(timeRepository.save(new Time(timeb_time.trim())));
     }
 
 
@@ -101,8 +125,19 @@ public class ReminderBService  {
     }
 
 
-    public ReminderView updateReminder(ReminderView reminder){return null;}
+    public ReminderView updateReminder(ReminderView remindersReceived){
+        Medicine medicine = medicineRepository.findById(remindersReceived.getMed_id()).orElseThrow();
+        Iterator<TimeView> reminderReceived = remindersReceived.getTimes().iterator();
+        Iterator<ReminderB> remindersExisting = medicine.getTimes().iterator();
+        while(remindersExisting.hasNext()){
+            ReminderB reminder = remindersExisting.next();
+            boolean deleteReminder = true;
+        }
+        return null;
+    }
     public void deleteReminder(long medbId, long timebId){}
+
+
 
     @Transactional
     public Medicine addMedicine(Medicine medicine)  {
@@ -150,11 +185,6 @@ public class ReminderBService  {
                 )
         );
     }
-
-
-
-
-
 
     private String addZeroAstetic(int number){
         if(number<10) return "0"+number;

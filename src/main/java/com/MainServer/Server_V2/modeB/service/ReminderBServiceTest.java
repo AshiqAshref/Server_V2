@@ -1,7 +1,7 @@
 package com.MainServer.Server_V2.modeB.service;
 
-import com.MainServer.Server_V2.modeB.model.view.ReminderView;
-import com.MainServer.Server_V2.modeB.model.view.TimeView;
+import com.MainServer.Server_V2.modeB.model.view.websiteView.ReminderView;
+import com.MainServer.Server_V2.modeB.model.view.websiteView.TimeView;
 import com.MainServer.Server_V2.modeB.model.ReminderB;
 import com.MainServer.Server_V2.modeB.model.Medicine;
 import com.MainServer.Server_V2.modeB.model.Time;
