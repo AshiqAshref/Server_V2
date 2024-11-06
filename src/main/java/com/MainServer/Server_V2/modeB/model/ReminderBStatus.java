@@ -31,8 +31,7 @@ public class ReminderBStatus {
     ) Date dateCreated;
 
     public ReminderBStatus() {}
-    public ReminderBStatus(Date dateCreated, short statMedDosage, short statMedAmount, String statMedName, int statMedBoxNo, String statTime) {
-        this.dateCreated = dateCreated;
+    public ReminderBStatus( short statMedDosage, short statMedAmount, String statMedName, int statMedBoxNo, String statTime) {
         this.statMedDosage = statMedDosage;
         this.statMedAmount = statMedAmount;
         this.statMedName = statMedName;
@@ -41,4 +40,12 @@ public class ReminderBStatus {
     }
 
     public void setDateCreated(Date dateCreated) {this.dateCreated = dateCreated;}
+
+    public Long getId()                 {return id;}
+    public String getStat_time()        {return statTime;}
+    public int getStat_med_box_no()     {return statMedBoxNo;}
+    public String getStat_med_name()    {return statMedName;}
+    public short getStat_med_amount()   {return statMedAmount;}
+    public short getStat_med_dosage()   {return statMedDosage;}
+    public Date getStat_date_created()  {return dateCreated;}
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/esp/modeb")
+@RequestMapping("modeB/esp")
 public class ModeBResourceEsp {
     private final ReminderBServiceEsp reminderBServiceEsp;
 

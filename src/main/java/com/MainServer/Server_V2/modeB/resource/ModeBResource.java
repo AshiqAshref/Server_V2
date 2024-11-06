@@ -1,8 +1,10 @@
 package com.MainServer.Server_V2.modeB.resource;
 
 import com.MainServer.Server_V2.modeB.model.Medicine;
+import com.MainServer.Server_V2.modeB.model.RevisionNumberModeB;
 import com.MainServer.Server_V2.modeB.model.view.websiteView.ReminderView;
 import com.MainServer.Server_V2.modeB.service.ReminderBService;
+import com.MainServer.Server_V2.modeB.service.RevisionNumberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +15,10 @@ import java.util.List;
 @RequestMapping("/modeB")
 public class ModeBResource {
     private final ReminderBService reminderBService;
-    public ModeBResource(ReminderBService reminderBService){
+    private final RevisionNumberService revisionNumberService;
+    public ModeBResource(ReminderBService reminderBService, RevisionNumberService revisionNumberService){
         this.reminderBService = reminderBService;
+        this.revisionNumberService = revisionNumberService;
     }
 
 
@@ -63,6 +67,11 @@ public class ModeBResource {
     public ResponseEntity<?> deleteMedicine(@PathVariable("id") long id){
         reminderBService.deleteMedicine(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("revision_no")
+    public ResponseEntity<RevisionNumberModeB> getRevisionNo(){
+        return new ResponseEntity<>(revisionNumberService.getRevisionNumber(), HttpStatus.OK);
     }
 
 

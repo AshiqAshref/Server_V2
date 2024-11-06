@@ -1,5 +1,6 @@
 package com.MainServer.Server_V2.modeB.service;
 
+import com.MainServer.Server_V2.modeB.model.RevisionNumberModeB;
 import com.MainServer.Server_V2.modeB.model.view.websiteView.ReminderView;
 import com.MainServer.Server_V2.modeB.model.view.websiteView.TimeView;
 import com.MainServer.Server_V2.modeB.model.ReminderB;
@@ -7,6 +8,7 @@ import com.MainServer.Server_V2.modeB.model.Medicine;
 import com.MainServer.Server_V2.modeB.model.Time;
 import com.MainServer.Server_V2.modeB.repository.MedicineRepository;
 import com.MainServer.Server_V2.modeB.repository.ReminderBRepository;
+import com.MainServer.Server_V2.modeB.repository.RevisionNumberModeBRepository;
 import com.MainServer.Server_V2.modeB.repository.TimeRepository;
 import com.github.javafaker.Faker;
 import jakarta.persistence.EntityManager;
@@ -22,6 +24,7 @@ import java.util.Random;
 
 @Service
 public class ReminderBServiceTest {
+    public RevisionNumberModeBRepository revisionNumberModeBRepository;
     public ReminderBRepository reminderBRepository;
     public MedicineRepository medicineRepository;
     public TimeRepository timeRepository;
@@ -29,10 +32,13 @@ public class ReminderBServiceTest {
     @Autowired
     public ReminderBServiceTest(ReminderBRepository reminderBRepository,
                             MedicineRepository medicineRepository,
-                            TimeRepository timeRepository) {
+                            TimeRepository timeRepository,
+                                RevisionNumberModeBRepository revisionNumberModeBRepository) {
         this.reminderBRepository = reminderBRepository;
         this.medicineRepository = medicineRepository;
         this.timeRepository = timeRepository;
+        this.revisionNumberModeBRepository = revisionNumberModeBRepository;
+
     }
     @PersistenceContext
     private EntityManager em;
@@ -81,6 +87,8 @@ public class ReminderBServiceTest {
         return medicines;
     }
     private Time saveTime(Time time){
+        RevisionNumberModeB revisionNumber = revisionNumberModeBRepository.findById(1).get();
+        revisionNumber.updateRevisionValue();
         return timeRepository.findTimeByTimebTime(time.getTimeb_time()).orElse(timeRepository.save(time));
     }
     private List<Time> generateRandomTimes(int numberOfTimes, boolean byFives){
@@ -99,6 +107,8 @@ public class ReminderBServiceTest {
                     times.add(time);
             }
         }
+        RevisionNumberModeB revisionNumber = revisionNumberModeBRepository.findById(1).get();
+        revisionNumber.updateRevisionValue();
         return times;
     }
     private String getRandomTime(){
@@ -154,6 +164,8 @@ public class ReminderBServiceTest {
     }
 
     private Medicine saveMedicine(Medicine medicine) {
+        RevisionNumberModeB revisionNumber = revisionNumberModeBRepository.findById(1).get();
+        revisionNumber.updateRevisionValue();
         return medicineRepository.findMedicineByMedName(medicine.getMed_name()).orElse(
                 medicineRepository.findMedicineByMedBoxNo(medicine.getMed_box_no()).orElse(
                         medicineRepository.save(medicine)

@@ -42,7 +42,8 @@ public class ModeBResourceTest {
 
     @GetMapping("/test")
     public ResponseEntity<?> test(){
+        System.out.println("GOT FROM TEST");
         reminderBServiceTest.test(2);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("fuckuBitch", HttpStatus.OK);
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="testONLYSpring@localhost">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.52">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.53">
     <root id="1">
       <DefaultCasing>lower/lower</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -1069,23 +1069,23 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
     <column id="306" parent="299" name="med_id">
-      <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>bigint|0s</StoredType>
     </column>
     <column id="307" parent="299" name="med_amount">
-      <DasType>smallint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
+      <StoredType>smallint|0s</StoredType>
     </column>
     <column id="308" parent="299" name="med_box_no">
-      <DasType>smallint|0s</DasType>
       <Position>3</Position>
+      <StoredType>smallint|0s</StoredType>
     </column>
     <column id="309" parent="299" name="med_name">
-      <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
+      <StoredType>varchar(255)|0s</StoredType>
     </column>
     <index id="310" parent="299" name="PRIMARY">
       <ColNames>med_id</ColNames>
@@ -1114,27 +1114,27 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>med_name_index</UnderlyingIndexName>
     </key>
     <column id="316" parent="300" name="next_val">
-      <DasType>bigint|0s</DasType>
       <Position>1</Position>
+      <StoredType>bigint|0s</StoredType>
     </column>
     <column id="317" parent="301" name="next_val">
-      <DasType>bigint|0s</DasType>
       <Position>1</Position>
+      <StoredType>bigint|0s</StoredType>
     </column>
     <column id="318" parent="302" name="rema_id">
-      <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>bigint|0s</StoredType>
     </column>
     <column id="319" parent="302" name="rema_box_no">
-      <DasType>smallint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
+      <StoredType>smallint|0s</StoredType>
     </column>
     <column id="320" parent="302" name="rema_time">
-      <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
+      <StoredType>varchar(255)|0s</StoredType>
     </column>
     <index id="321" parent="302" name="PRIMARY">
       <ColNames>rema_id</ColNames>
@@ -1163,19 +1163,19 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>rema_time_unique</UnderlyingIndexName>
     </key>
     <column id="327" parent="303" name="timeb_dosage">
-      <DasType>smallint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>smallint|0s</StoredType>
     </column>
     <column id="328" parent="303" name="medicine_med_id">
-      <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
+      <StoredType>bigint|0s</StoredType>
     </column>
     <column id="329" parent="303" name="time_timeb_id">
-      <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
+      <StoredType>bigint|0s</StoredType>
     </column>
     <foreign-key id="330" parent="303" name="FKdcdtq7umvu4t2tdvmukgkp338">
       <ColNames>medicine_med_id</ColNames>
@@ -1203,18 +1203,18 @@ time_timeb_id</ColNames>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="335" parent="304" name="next_val">
-      <DasType>bigint|0s</DasType>
       <Position>1</Position>
+      <StoredType>bigint|0s</StoredType>
     </column>
     <column id="336" parent="305" name="timeb_id">
-      <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>bigint|0s</StoredType>
     </column>
     <column id="337" parent="305" name="timeb_time">
-      <DasType>varchar(5)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
+      <StoredType>varchar(5)|0s</StoredType>
     </column>
     <index id="338" parent="305" name="PRIMARY">
       <ColNames>timeb_id</ColNames>

@@ -4,12 +4,15 @@ import com.MainServer.Server_V2.exception.DuplicateValueException;
 
 import com.MainServer.Server_V2.modeB.model.Medicine;
 import com.MainServer.Server_V2.modeB.model.ReminderB;
+import com.MainServer.Server_V2.modeB.model.RevisionNumberModeB;
 import com.MainServer.Server_V2.modeB.model.Time;
 import com.MainServer.Server_V2.modeB.model.view.websiteView.ReminderView;
 import com.MainServer.Server_V2.modeB.model.view.websiteView.TimeView;
 import com.MainServer.Server_V2.modeB.repository.MedicineRepository;
 import com.MainServer.Server_V2.modeB.repository.ReminderBRepository;
+import com.MainServer.Server_V2.modeB.repository.RevisionNumberModeBRepository;
 import com.MainServer.Server_V2.modeB.repository.TimeRepository;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -22,8 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 
 @Service
-
 public class ReminderBService  {
+    public  RevisionNumberModeBRepository revisionNumberModeBRepository;
     public ReminderBRepository reminderBRepository;
     public MedicineRepository medicineRepository;
     public TimeRepository timeRepository;
@@ -31,15 +34,16 @@ public class ReminderBService  {
     @Autowired
     public ReminderBService(ReminderBRepository reminderBRepository,
                             MedicineRepository medicineRepository,
-                            TimeRepository timeRepository) {
+                            TimeRepository timeRepository,
+                            RevisionNumberModeBRepository revisionNumberModeBRepository) {
         this.reminderBRepository = reminderBRepository;
         this.medicineRepository = medicineRepository;
         this.timeRepository = timeRepository;
+        this.revisionNumberModeBRepository = revisionNumberModeBRepository;
     }
 
     @PersistenceContext
     private EntityManager em;
-
 
     public List<ReminderView> getAllReminders(){
         return reminderBtoReminderView(medicineRepository.findAll());
@@ -50,6 +54,7 @@ public class ReminderBService  {
         Medicine medicine = medicineRepository.findById(reminderReceived.getMed_id()).orElseThrow(RuntimeException::new);
         List<TimeView> recivedTimeeees = reminderReceived.getTimes();
         Iterator<ReminderB> iterator = medicine.getTimes().iterator();
+        RevisionNumberModeB revisionNumber = revisionNumberModeBRepository.findById(1).get();
         while(iterator.hasNext()){
             ReminderB reminderExisting = iterator.next();
             boolean deleteReminder = true;
@@ -67,7 +72,6 @@ public class ReminderBService  {
                 medicine.removeTime(reminderExisting.getTime());
             }
         }
-
         medicineRepository.flush();
         for (TimeView timeRecived : recivedTimeeees) {
             Time time = getOrCreateTime(timeRecived.getTime());
@@ -75,6 +79,7 @@ public class ReminderBService  {
             medicineRepository.flush();
         }
         cleanTimesTable();
+        revisionNumber.updateRevisionValue();
         return reminderBtoReminderView(medicineRepository.save(medicine));
     }
 
@@ -141,18 +146,26 @@ public class ReminderBService  {
 
     @Transactional
     public Medicine addMedicine(Medicine medicine)  {
+        RevisionNumberModeB revisionNumber = revisionNumberModeBRepository.findById(1).get();
+
+
         checkIfMedicineGood(medicine);
+        revisionNumber.updateRevisionValue();
         return medicineRepository.save(medicine);
     }
 
     @Transactional
     public void deleteMedicine(Long id) {
+        RevisionNumberModeB revisionNumber = revisionNumberModeBRepository.findById(1).get();
         medicineRepository.deleteById(id);
+        cleanTimesTable();
+        revisionNumber.updateRevisionValue();
     }
 
     @Transactional
     public Medicine updateMedicine(Medicine medicineToUpdate)  {
         Optional<Medicine> medicineOptional = medicineRepository.findMedicineByMedName(medicineToUpdate.getMed_name());
+        RevisionNumberModeB revisionNumber = revisionNumberModeBRepository.findById(1).get();
         if(medicineOptional.isPresent()){
             if(medicineOptional.get().getMed_id()!= medicineToUpdate.getMed_id())
                 throw new DuplicateValueException("Medicine with name " + medicineToUpdate.getMed_name() + " already exists");
@@ -161,6 +174,7 @@ public class ReminderBService  {
         medicine.setMed_amount(medicineToUpdate.getMed_amount());
         medicine.setMed_box_no(medicineToUpdate.getMed_box_no());
         medicine.setMed_name(medicineToUpdate.getMed_name());
+        revisionNumber.updateRevisionValue();
         return medicineRepository.save(medicine);
     }
 

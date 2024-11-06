@@ -1,6 +1,5 @@
 package com.MainServer.Server_V2.modeB.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -93,7 +92,7 @@ public class Medicine {
 
 
 
-//    @Override
+    //    @Override
 //    public String toString() {
 //        return "{"
 //                + "\"med_id\" : "  + id
